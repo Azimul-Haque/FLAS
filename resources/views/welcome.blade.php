@@ -52,7 +52,7 @@
         <!-- Collect the nav links, forms, and other content for toggling-->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li class=""><a href="/">নীড় পাতা</a></li>
+            <li class=""><a href="/">Home</a></li>
             
           </ul>
           <ul class="nav navbar-nav navbar-right">
@@ -74,10 +74,10 @@
             -->
             @else
             <li class="dropdown">
-              <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ব্লগ লিখুন <span class="caret"></span></a>
+              <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="" class="">লগ ইন করুন</a></li>
-                <li><a href="" class="">রেজিস্টার করুন</a></li>
+                <li><a href="" class="">Login</a></li>
+                <li><a href="" class="">Register</a></li>
               </ul>
             </li>
             @endif
