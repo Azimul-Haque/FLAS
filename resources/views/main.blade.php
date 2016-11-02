@@ -12,6 +12,7 @@
     <!-- CHANGE THIS TITLE FOR EACH PAGE -->
     @yield('stylesheet')
     {!!Html::style('css/styles.css')!!}
+    {!!Html::style('css/font-awesome.min.css')!!}
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <style type="text/css">
@@ -46,38 +47,38 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Laravel Blog</a>
+          <a class="navbar-brand" href="/">FLAS</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling-->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li class=""><a href="/">নীড় পাতা</a></li>
-            
+            @if(Auth::check())
+            <li class=""><a href="{{ url('/home') }}"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+            @endif
+            @role('Admin')
+                <li><a href="{{ url('/admin') }}"><i class="fa fa-wrench" aria-hidden="true"></i> Manage Users</a></li>
+                <li><a href="{{ url('/roles') }}"><i class="fa fa-cogs" aria-hidden="true"></i> Manage Roles</a></li>
+            @endrole
+            @role('Applicant')
+            <li class=""><a href="{{route('applications.create')}}"><i class="fa fa-address-card" aria-hidden="true"></i> Application</a></li>
+            @endrole
           </ul>
           <ul class="nav navbar-nav navbar-right">
 
             @if(Auth::check())
-                
-            <!--
             <li class="dropdown">
-              <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">আমার একাউন্ট <span class="caret"></span></a>
+              <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle" aria-hidden="true"></i> {{Auth::user()->name}} <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="/profile">{{Auth::user()->name}}</a></li>
-                <li class="{{ Request::is('posts') ? 'active': '' }}"><a href="/posts">আমার লেখাগুলো</a></li>
-                <li><a href="{{ route('categories.index') }}">ক্যাটাগরি</a></li>
-                <li><a href="{{ route('tags.index') }}">সকল ট্যাগ</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="{{ route('logout') }}">লগ আউট</a></li>
+                <li><a href="{{ route('logout') }}" class=""><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
               </ul>
             </li>
-            -->
             @else
             <li class="dropdown">
-              <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ব্লগ লিখুন <span class="caret"></span></a>
+              <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle" aria-hidden="true"></i> User Account <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="" class="">লগ ইন করুন</a></li>
-                <li><a href="" class="">রেজিস্টার করুন</a></li>
+                <li><a href="{{ route('login') }}" class=""><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
+                <li><a href="{{ route('register') }}" class=""><i class="fa fa-user-plus" aria-hidden="true"></i> Create New Account</a></li>
               </ul>
             </li>
             @endif
@@ -89,7 +90,7 @@
     </nav>
 
     <div class="container"> <!--USE IT NEAR FUTURE  style="margin-top:50px"-->
-       <!--partials._messages-->
+      @include('partials._messages') 
       @yield('content')
 
     </div>
