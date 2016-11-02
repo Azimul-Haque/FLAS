@@ -99,7 +99,7 @@
     <div class="footer">
       <div class="container">
         <hr>
-        <p class="text-muted text-center">&copy; {{date('Y')}} Copyright Reserved, Fire License Automation System</p>
+        <p class="text-muted text-center">&copy; {{date('Y')}} Copyright Reserved, Fire License Automation System, BFSCD</p>
       </div>
   </div>
 
