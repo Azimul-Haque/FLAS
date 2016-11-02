@@ -29,6 +29,11 @@
 
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
+			@if(!empty($applied))
+			<h3>You have already applied!</h3>
+			<a href="{{ url('applications/'.$applied->id) }}" class="btn btn-success">See Application</a>
+
+			@else
 			<h1>Apply for License</h1>
 			<hr>
 			{!! Form::open(['route' => 'applications.store', 'data-parsley-validate' => '', 'files' => 'true', 'enctype' => 'multipart/form-data', 'method' => 'POST']) !!}
@@ -89,6 +94,8 @@
 			 	
 			 	{!! Form::submit('Submit for Verification', array('class' => 'btn btn-success btn-block', 'style' => 'margin-top:20px;')) !!}
 			{!! Form::close() !!}
+
+			@endif
 		</div>
 	</div>
 

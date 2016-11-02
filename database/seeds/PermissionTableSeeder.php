@@ -35,23 +35,33 @@ class PermissionTableSeeder extends Seeder
         	],
         	[
         		'name' => 'application-list',
-        		'display_name' => 'Display Item Listing',
-        		'description' => 'See only Listing Of Item'
+        		'display_name' => 'Display Application Listing',
+        		'description' => 'See only Listing Of Application' 
         	],
         	[
         		'name' => 'application-create',
-        		'display_name' => 'Create Item',
-        		'description' => 'Create New Item'
+        		'display_name' => 'Create Application',
+        		'description' => 'Create New Application'
         	],
         	[
         		'name' => 'application-edit',
-        		'display_name' => 'Edit Item',
-        		'description' => 'Edit Item'
+        		'display_name' => 'Edit Application',
+        		'description' => 'Edit Application'
         	],
+            [
+                'name' => 'application-delete',
+                'display_name' => 'Delete Application',
+                'description' => 'Delete Application'
+            ],
+            [
+                'name' => 'application-inspection',
+                'display_name' => 'Inspection Application',
+                'description' => 'Inspection Application'
+            ],
         	[
-        		'name' => 'application-delete',
-        		'display_name' => 'Delete Item',
-        		'description' => 'Delete Item'
+        		'name' => 'report-genetation',
+        		'display_name' => 'Generate Report',
+        		'description' => 'Generate Report'
         	]
         ];
 

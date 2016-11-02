@@ -14,11 +14,14 @@ use Image;
 class ApplicationController extends Controller
 {
 
+    public function __construct(){
+        $this->middleware('role:Applicant');
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
-     */
+    */
     public function index()
     {
         //
@@ -31,7 +34,9 @@ class ApplicationController extends Controller
      */
     public function create()
     {
-        return view('applications.create');
+        $applied = Application::where('created_by_id', '=' , Auth::user()->id)->first();               
+                    
+        return view('applications.create')->withApplied($applied); ;
     }
 
     /**
@@ -61,6 +66,8 @@ class ApplicationController extends Controller
         //store to DB
         $application = new Application;
 
+        $application->created_by_id = Auth::user()->id;
+        $application->is_editable = 1;
         $application->company_name = $request->company_name;
         $application->email = $request->email;
         $application->phone = $request->phone;
@@ -100,7 +107,9 @@ class ApplicationController extends Controller
      */
     public function show($id)
     {
-        $application = Application::where('id', '=' , $id)->first();                  
+        $application = Application::where('id', '=' , $id)
+                            ->where('created_by_id', '=' , Auth::user()->id)
+                            ->first();                     
         return view('applications.show')
                     ->withApplication($application); 
     }

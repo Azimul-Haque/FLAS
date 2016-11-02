@@ -70,7 +70,12 @@
 				<hr>
 				<div class="row">
 					<div class="col-sm-6">
+						@if ($application->is_editable === 1)
 						{!! Html::linkRoute('applications.edit', 'Edit', array($application->id), array('class'=>'btn btn-primary btn-block')) !!}
+						@else
+						<button class="btn btn-primary btn-block disabled">Edit</button>
+						@endif
+						
 						
 					</div>
 					<div class="col-sm-6">

@@ -14,6 +14,8 @@ class CreateApplicationTable extends Migration
     {
         Schema::create('applications', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('created_by_id')->unsigned();
+            $table->integer('is_editable')->unsigned();
             $table->string('company_name');
             $table->string('email')->unique();
             $table->string('phone'); 
@@ -34,6 +36,6 @@ class CreateApplicationTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('applications');
     }
 }

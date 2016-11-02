@@ -40,9 +40,9 @@
       @endpermission
       @permission('role-delete')
       {!! Form::open(['method' => 'DELETE','route' => ['roles.destroy', $role->id],'style'=>'display:inline']) !!}
-            {{Form::button('<i class="fa fa-trash" aria-hidden="true"></i> Delete', array('type' => 'submit', 'class' => 'btn btn-danger btn-sm'))}}
-          {!! Form::close() !!}
-          @endpermission
+          {{Form::button('<i class="fa fa-trash" aria-hidden="true"></i> Delete', array('type' => 'submit', 'class' => 'btn btn-danger btn-sm'))}}
+      {!! Form::close() !!}
+      @endpermission
     </td>
   </tr>
   @endforeach

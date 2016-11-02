@@ -15,26 +15,26 @@ class UserTableSeeder extends Seeder
     {
 
         DB::table('users')->insert([
-            'name' => str_random(10),
-            'email' => str_random(10).'@gmail.com',
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
             'password' => bcrypt('secret'),
         ]);         
 
         DB::table('users')->insert([
-            'name' => str_random(10),
-            'email' => str_random(10).'@gmail.com',
+            'name' => 'Inspector',
+            'email' => 'inspector@gmail.com',
             'password' => bcrypt('secret'),
         ]);        
 
         DB::table('users')->insert([
-            'name' => str_random(10),
-            'email' => str_random(10).'@gmail.com',
+            'name' => 'Rapporteur',
+            'email' => 'rapporteur@gmail.com',
             'password' => bcrypt('secret'),
         ]);        
 
         DB::table('users')->insert([
-            'name' => str_random(10),
-            'email' => str_random(10).'@gmail.com',
+            'name' => 'Applicant',
+            'email' => 'applicant@gmail.com',
             'password' => bcrypt('secret'),
         ]); 
     }

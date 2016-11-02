@@ -60,6 +60,9 @@
                 <li><a href="{{ url('/admin') }}"><i class="fa fa-wrench" aria-hidden="true"></i> Manage Users</a></li>
                 <li><a href="{{ url('/roles') }}"><i class="fa fa-cogs" aria-hidden="true"></i> Manage Roles</a></li>
             @endrole
+            @role('Inspector')
+            <li class=""><a href="{{route('applications.create')}}"><i class="fa fa-list-ol" aria-hidden="true"></i> Inspect Applications</a></li>
+            @endrole
             @role('Applicant')
             <li class=""><a href="{{route('applications.create')}}"><i class="fa fa-address-card" aria-hidden="true"></i> Application</a></li>
             @endrole
