@@ -15,6 +15,7 @@ class CreateApplicationTable extends Migration
         Schema::create('applications', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('created_by_id')->unsigned();
+            $table->integer('application_status_id')->unsigned();
             $table->integer('is_editable')->unsigned();
             $table->string('company_name');
             $table->string('email')->unique();
@@ -25,6 +26,7 @@ class CreateApplicationTable extends Migration
             $table->string('address');
             $table->integer('employees')->unsigned();
             $table->string('estd');
+            $table->string('image')->nullable(); 
             $table->timestamps();
         });
     }

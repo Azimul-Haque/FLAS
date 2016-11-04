@@ -30,7 +30,7 @@
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
 			@if(!empty($applied))
-			<h3>You have already applied!</h3>
+			<h3>You have already applied! ({{ $applied->application_status->display_name }})</h3>
 			<a href="{{ url('applications/'.$applied->id) }}" class="btn btn-success">See Application</a>
 
 			@else

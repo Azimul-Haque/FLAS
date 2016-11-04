@@ -38,3 +38,13 @@ Route::resource('admin', 'AdminController');
 
 // Roles Controller
 Route::resource('roles', 'RoleController');
+
+// Inspection Controller
+Route::resource('inspections', 'InspectionController');
+
+Route::get('inspections/create/{id}', ['as' => 'inspections.create', 'uses' => 'InspectionController@create']);
+
+
+Route::get('inspections/inspect/{id}', ['as' => 'inspections.inspect', 'uses' => 'InspectionController@getInspect']);
+Route::post('inspections/inspect', ['as' => 'inspections.notify', 'uses' => 'InspectionController@postInspect']);
+Route::get('inspections/inspect/response/{id}', ['as' => 'inspections.response', 'uses' => 'InspectionController@getResponse']);

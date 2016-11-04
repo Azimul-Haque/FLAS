@@ -8,6 +8,11 @@ use Zizaco\Entrust\Traits\EntrustUserTrait;
 class User extends Authenticatable
 {
     use EntrustUserTrait;
+
+    public function applications()
+    {
+        return $this->hasOne('App\Application', 'id', 'created_by_id');
+    }    
     
     /**
      * The attributes that are mass assignable.

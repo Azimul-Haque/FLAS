@@ -61,7 +61,7 @@
                 <li><a href="{{ url('/roles') }}"><i class="fa fa-cogs" aria-hidden="true"></i> Manage Roles</a></li>
             @endrole
             @role('Inspector')
-            <li class=""><a href="{{route('applications.create')}}"><i class="fa fa-list-ol" aria-hidden="true"></i> Inspect Applications</a></li>
+            <li class=""><a href="{{ url('/inspections') }}"><i class="fa fa-list-ol" aria-hidden="true"></i> Inspect Applications</a></li>
             @endrole
             @role('Applicant')
             <li class=""><a href="{{route('applications.create')}}"><i class="fa fa-address-card" aria-hidden="true"></i> Application</a></li>

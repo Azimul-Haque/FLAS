@@ -60,10 +60,6 @@
 		<div class="col-md-4">
 			<div class="well">
 				<dl class="dl-horizontal">
-					<label>Application Status</label>
-					<p>License is {{ $application->application_status->display_name }}</p>
-				</dl>
-				<dl class="dl-horizontal">
 					<label>Created at</label>
 					<p>{{ date('F d, Y h:i A', strtotime($application->created_at))}}</p>
 				</dl>
@@ -75,7 +71,7 @@
 				<div class="row">
 					<div class="col-sm-6">
 						@if ($application->is_editable === 1)
-						{!! Html::linkRoute('applications.edit', 'Edit', array($application->id), array('class'=>'btn btn-primary btn-block')) !!}
+						<a class="btn btn-primary btn-block" href="{{ route('inspections.inspect',$application->id) }}"> Inspect</a>
 						@else
 						<button class="btn btn-primary btn-block disabled">Edit</button>
 						@endif
@@ -83,7 +79,7 @@
 						
 					</div>
 					<div class="col-sm-6">
-					{!! Form::open(['route' => ['applications.destroy', $application->id], 'method'=>'DELETE']) !!}
+					{!! Form::open(['route' => ['inspections.destroy', $application->id], 'method'=>'DELETE']) !!}
 						{!! Form::submit('Delete', ['class'=>'btn btn-danger btn-block']) !!}
 					{!! Form::close() !!}	
 					</div>

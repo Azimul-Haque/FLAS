@@ -36,6 +36,24 @@ class UserTableSeeder extends Seeder
             'name' => 'Applicant',
             'email' => 'applicant@gmail.com',
             'password' => bcrypt('secret'),
+        ]);        
+
+        DB::table('users')->insert([
+            'name' => 'Applicant2',
+            'email' => 'applicant2@gmail.com',
+            'password' => bcrypt('secret'),
+        ]);       
+
+        DB::table('users')->insert([
+            'name' => 'Applicant3',
+            'email' => 'applicant3@gmail.com',
+            'password' => bcrypt('secret'),
+        ]);       
+
+        DB::table('users')->insert([
+            'name' => 'Applicant4',
+            'email' => 'applicant4@gmail.com',
+            'password' => bcrypt('secret'),
         ]); 
     }
 }

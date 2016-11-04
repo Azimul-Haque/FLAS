@@ -34,8 +34,8 @@ class ApplicationController extends Controller
      */
     public function create()
     {
-        $applied = Application::where('created_by_id', '=' , Auth::user()->id)->first();               
-                    
+        $applied = Application::where('created_by_id', '=' , Auth::user()->id)->first();
+
         return view('applications.create')->withApplied($applied); ;
     }
 
@@ -67,6 +67,7 @@ class ApplicationController extends Controller
         $application = new Application;
 
         $application->created_by_id = Auth::user()->id;
+        $application->application_status_id = 1;
         $application->is_editable = 1;
         $application->company_name = $request->company_name;
         $application->email = $request->email;
