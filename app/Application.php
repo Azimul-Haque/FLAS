@@ -13,7 +13,7 @@ class Application extends Model
 
 	public function inspections()
     {
-        return $this->hasOne('App\Inspection', 'id', 'application_id');
+        return $this->hasOne('App\Inspection', 'application_id');
     }	
 
     public function application_status()

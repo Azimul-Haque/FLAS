@@ -9,9 +9,8 @@
 
 
 @section('content')
-
       <div class="row">
-        <div class="col-md-8">
+          <div class="col-md-8">
           <div class="panel panel-default">
             <div class="panel-heading"><span style="font-size: 20px;">This is Home Page</span></div>
             <div class="panel-body">
@@ -35,9 +34,7 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="text-center">
-      </div>
+    </div>
 @endsection
 
 @section('script')

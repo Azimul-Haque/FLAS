@@ -39,7 +39,7 @@
 
 				<div class="row">
 					<div class="col-md-12">
-					{!! Form::submit('Registter', array('class' => 'btn btn-primary btn-block', 'style' => 'margin-top:20px;')) !!}	
+					{!! Form::submit('Register', array('class' => 'btn btn-primary btn-block', 'style' => 'margin-top:20px;')) !!}	
 					</div>
 				</div>				 	
 			{!! Form::close() !!}

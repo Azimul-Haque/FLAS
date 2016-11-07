@@ -8,6 +8,6 @@ class Inspection extends Model
 {
     public function applications()
 	{
-	    return $this->belongsTo('App\Application', 'application_id', 'id');
+	    return $this->belongsTo('App\Application', 'application_id');
 	}
 }

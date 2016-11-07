@@ -95,6 +95,9 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'applications_id' => [
+            'unique' => 'This application has been inspected! To edit and resend E-Mail to the applicant please go to EDIT section',
+        ],
     ],
 
     /*

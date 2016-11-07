@@ -70,11 +70,8 @@
 				<hr>
 				<div class="row">
 					<div class="col-sm-6">
-						@if ($application->is_editable === 1)
 						<a class="btn btn-primary btn-block" href="{{ route('inspections.inspect',$application->id) }}"> Inspect</a>
-						@else
-						<button class="btn btn-primary btn-block disabled">Edit</button>
-						@endif
+
 						
 						
 					</div>

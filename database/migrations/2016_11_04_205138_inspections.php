@@ -14,7 +14,7 @@ class Inspections extends Migration
     {
         Schema::create('inspections', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('applications_id')->unsigned();
+            $table->integer('applications_id')->unsigned()->unique();
 
             $table->string('check_company_name')->nullable();
             $table->string('initial_company_name')->nullable();

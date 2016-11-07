@@ -57,15 +57,30 @@
             <li class=""><a href="{{ url('/home') }}"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
             @endif
             @role('Admin')
-                <li><a href="{{ url('/admin') }}"><i class="fa fa-wrench" aria-hidden="true"></i> Manage Users</a></li>
-                <li><a href="{{ url('/roles') }}"><i class="fa fa-cogs" aria-hidden="true"></i> Manage Roles</a></li>
+            <li class="dropdown">
+              <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cogs" aria-hidden="true"></i>  Admin <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="{{ url('/admin') }}"><i class="fa fa-users" aria-hidden="true"></i> Manage Users</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="{{ url('/roles') }}"><i class="fa fa-wrench" aria-hidden="true"></i> Manage Roles</a></li>
+              </ul>
+            </li>
             @endrole
             @role('Inspector')
-            <li class=""><a href="{{ url('/inspections') }}"><i class="fa fa-list-ol" aria-hidden="true"></i> Inspect Applications</a></li>
+            <li class="dropdown">
+              <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-list-ol" aria-hidden="true"></i> Inspect Applications <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li class=""><a href="{{ route('inspections.pending') }}"><i class="fa fa-hourglass-start" aria-hidden="true"></i> Pending Applications</a></li>
+                <li role="separator" class="divider"></li>
+                <li class=""><a href="{{ route('inspections.approved') }}"><i class="fa fa-check" aria-hidden="true"></i> Approved Applications</a></li>
+              </ul>
+            </li>
             @endrole
             @role('Applicant')
             <li class=""><a href="{{route('applications.create')}}"><i class="fa fa-address-card" aria-hidden="true"></i> Application</a></li>
             @endrole
+            <li><a href="{{ url('/about') }}"><i class="fa fa-address-book-o" aria-hidden="true"></i> About</a></li>
+            <li><a href="{{ url('/contact') }}"><i class="fa fa-envelope-o" aria-hidden="true"></i> Contact</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
 
@@ -92,9 +107,80 @@
       <!-- /.container-fluid -->
     </nav>
 
-    <div class="container"> <!--USE IT NEAR FUTURE  style="margin-top:50px"-->
-      @include('partials._messages') 
+    <div class="container-fluid"> <!--USE IT NEAR FUTURE  style="margin-top:50px"-->
+      @if(Auth::check())
+          <div class="row">
+            <div class="col-md-2">
+                <div class="panel-group" id="accordion">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><i class="fa fa-cogs" aria-hidden="true"></i> Collapsible Group 1</a>
+                      </h4>
+                    </div>
+                    <div id="collapse1" class="panel-collapse collapse">
+                      <ul class="list-group">
+                        <li class="list-group-item">One</li>
+                        <li class="list-group-item">Two</li>
+                        <li class="list-group-item">Three</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2"><i class="fa fa-cogs" aria-hidden="true"></i> Collapsible Group 2</a>
+                      </h4>
+                    </div>
+                    <div id="collapse2" class="panel-collapse collapse">
+                      <ul class="list-group">
+                        <li class="list-group-item">One</li>
+                        <li class="list-group-item">Two</li>
+                        <li class="list-group-item">Three</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3"><i class="fa fa-cogs" aria-hidden="true"></i> Collapsible Group 3</a>
+                      </h4>
+                    </div>
+                    <div id="collapse3" class="panel-collapse collapse">
+                      <ul class="list-group">
+                        <li class="list-group-item">One</li>
+                        <li class="list-group-item">Two</li>
+                        <li class="list-group-item">Three</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3"><i class="fa fa-cogs" aria-hidden="true"></i> Collapsible Group 3</a>
+                      </h4>
+                    </div>
+                    <div id="collapse3" class="panel-collapse collapse">
+                      <ul class="list-group">
+                        <li class="list-group-item">One</li>
+                        <li class="list-group-item">Two</li>
+                        <li class="list-group-item">Three</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          <div class="col-md-10">
+          @include('partials._messages')
+            @yield('content')
+          </div>
+      @else
+      @include('partials._messages')
       @yield('content')
+      @endif
+
+      </div>
+      
 
     </div>
     <!-- end of .container -->
@@ -104,7 +190,7 @@
         <hr>
         <p class="text-muted text-center">&copy; {{date('Y')}} Copyright Reserved, Fire License Automation System, BFSCD</p>
       </div>
-  </div>
+    </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
