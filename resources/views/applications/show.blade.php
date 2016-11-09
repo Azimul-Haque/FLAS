@@ -9,6 +9,21 @@
 @section('content')
 
 	<div class="row">
+		@if($application->application_status_id === 4)
+		<div class="col-md-8 col-md-offset-2">
+			<div class="well">
+				Your application has been rejected by the authority of BFSCD. </br>
+				<dl class="dl-horizontal">
+					<label>Company Name:</label>
+					<span><strong>{{ $application->company_name }}</strong></span>
+				</dl>
+				<dl class="dl-horizontal">
+					<label>Application Status:</label>
+					<span>License is <strong>{{ $application->application_status->display_name }}</strong></span>
+				</dl>
+			</div>
+		</div>
+		@else
 		<div class="col-md-8">
 			<h1 class="">Application View</h1>
 			<table class="table">
@@ -61,7 +76,7 @@
 			<div class="well">
 				<dl class="dl-horizontal">
 					<label>Application Status</label>
-					<p>License is {{ $application->application_status->display_name }}</p>
+					<p>License is <strong>{{ $application->application_status->display_name }}</strong></p>
 				</dl>
 				<dl class="dl-horizontal">
 					<label>Created at</label>
@@ -83,13 +98,12 @@
 						
 					</div>
 					<div class="col-sm-6">
-					{!! Form::open(['route' => ['applications.destroy', $application->id], 'method'=>'DELETE']) !!}
-						{!! Form::submit('Delete', ['class'=>'btn btn-danger btn-block']) !!}
-					{!! Form::close() !!}	
+					{!! Html::linkRoute('applications.destroy', 'Revoke', array($application->id), array('class'=>'btn btn-danger btn-block')) !!}
 					</div>
 				</div>
 			</div>
 		</div>
+		@endif
 
 	</div>
 

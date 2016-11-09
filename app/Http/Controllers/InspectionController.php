@@ -34,12 +34,23 @@ class InspectionController extends Controller
     public function getPending()
     {
         $applications = Application::orderBy('id','DESC')
-                        ->whereIn('application_status_id', [1, 2])
+                        ->where('application_status_id', '=', 1)
                         ->paginate(5);
 
         return view('inspections.tables.pending')
                 ->withApplications($applications);
+    }   
+
+    public function getInspected()
+    {
+        $applications = Application::orderBy('id','DESC')
+                        ->where('application_status_id', '=', 2)
+                        ->paginate(5);
+
+        return view('inspections.tables.inspected')
+                ->withApplications($applications);
     }
+
     public function getApproved()
     {
         $applications = Application::orderBy('id','DESC')
@@ -47,6 +58,16 @@ class InspectionController extends Controller
                         ->paginate(5);
 
         return view('inspections.tables.approved')
+                ->withApplications($applications);
+    }
+
+    public function getRejected()
+    {
+        $applications = Application::orderBy('id','DESC')
+                        ->where('application_status_id', '=', 4)
+                        ->paginate(5);
+
+        return view('inspections.tables.rejected')
                 ->withApplications($applications);
     }
 
@@ -94,7 +115,7 @@ class InspectionController extends Controller
     {
         //validation
         $this->validate($request, array(
-            'application_id'            => 'unique:inspections,application_id',
+            'application_id'             => 'unique:inspections,application_id',
             'email'                      => 'required|email',
             'check_company_name'         => 'sometimes',
             'initial_company_name'       => 'sometimes|max:255',
@@ -160,6 +181,7 @@ class InspectionController extends Controller
         // Turn Application Status PENDING to INSPECTED
         $application = Application::find($request->application_id);
         $application->application_status_id = 2;
+        $application->is_editable = 1;
         $application->save();
 
          
@@ -171,7 +193,7 @@ class InspectionController extends Controller
             );
         Mail::send('emails.inspect', $data, function($message) use ($data){
             $message->from($data['from']);
-            $message->to($data['email']);
+            $message->to('orbachinujbuk@gmail.com');
             $message->subject($data['subject']);
         });
 
@@ -288,6 +310,7 @@ class InspectionController extends Controller
         // Turn Application Status PENDING to INSPECTED
         $application = Application::find($request->application_id);
         $application->application_status_id = 2;
+        $application->is_editable = 1;
         $application->save();
 
         $data = array(
@@ -328,9 +351,26 @@ class InspectionController extends Controller
 
        // Turn Application Status INSPECTED to APPROVED
         $application->application_status_id = 3;
+        $application->is_editable = 0;
         $application->license_number = $request->license_number;
         $application->expiry_date = $request->expiry_date;
         $application->save();
+
+        $inspection = Inspection::firstOrCreate(['application_id' => $application->id]);
+
+        $data = array(
+            'from' => 'flasbfscd@gmail.com',
+            'email' => $request->email,
+            'subject' => 'FLAS Application Inspection Report',
+            'approval_message' => $request->approval_message,
+            'license_number' => $request->license_number,
+            'expiry_date' => $request->expiry_date
+            );
+        Mail::send('emails.approve', $data, function($message) use ($data){
+            $message->from($data['from']);
+            $message->to('orbachinujbuk@gmail.com');
+            $message->subject($data['subject']);
+        });
 
         Session::flash('success', 'The applicant has been sent a notification via email.');
 
@@ -339,7 +379,41 @@ class InspectionController extends Controller
     }
 
     public function getReject($id) {
+        $application = Application::find($id);
+        return view('inspections.reject')->withApplication($application);
+    }
 
+    public function postReject(Request $request, $id){
+        $application = Application::find($id);
+        //validation
+        $this->validate($request, array(
+            'email'                      => 'required|email',
+            'rejection_message'           => 'required'
+       ));
+
+       // Turn Application Status INSPECTED to APPROVED
+        $application->application_status_id = 4;
+        $application->is_editable = 0;
+        $application->save();
+
+        $inspection = Inspection::firstOrCreate(['application_id' => $application->id]);
+
+        $data = array(
+            'from' => 'flasbfscd@gmail.com',
+            'email' => $request->email,
+            'subject' => 'FLAS Application Inspection Report',
+            'rejection_message' => $request->rejection_message
+            );
+        Mail::send('emails.reject', $data, function($message) use ($data){
+            $message->from($data['from']);
+            $message->to('orbachinujbuk@gmail.com');
+            $message->subject($data['subject']);
+        });
+
+        Session::flash('success', 'The applicant has been sent a notification via email.');
+
+        //redirect
+        return redirect()->route('inspections.response', $application->id);
     }
 
     /**

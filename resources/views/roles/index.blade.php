@@ -47,7 +47,7 @@
   </tr>
   @endforeach
   </table>
-  {!! $roles->render() !!}
+  {!! $roles->links() !!}
 @endsection
 
 @section('script')

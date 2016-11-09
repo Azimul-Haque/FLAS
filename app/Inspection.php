@@ -10,4 +10,6 @@ class Inspection extends Model
 	{
 	    return $this->belongsTo('App\Application', 'application_id');
 	}
+
+	protected $fillable = ['application_id'];
 }

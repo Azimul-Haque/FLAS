@@ -47,11 +47,14 @@ Route::get('inspections/{id}/edit', ['as' => 'inspections.edit', 'uses' => 'Insp
 Route::patch('inspections/{id}', ['as' => 'inspections.update', 'uses' => 'InspectionController@update']);
 
 
-// PENDING/INSPECTED
+// PENDING
 Route::get('inspections/', ['as' => 'inspections.index', 'uses' => 'InspectionController@index']);
 Route::get('inspections/pending', ['as' => 'inspections.pending', 'uses' => 'InspectionController@getPending']);
-// APPROVED
-Route::get('inspections/approved', ['as' => 'inspections.approved', 'uses' => 'InspectionController@getApproved']);
+// INSPECTED
+Route::get('inspections/inspected', ['as' => 'inspections.inspected', 'uses' => 'InspectionController@getInspected']);
+// APPROVED 
+Route::get('inspections/approved', ['as' => 'inspections.approved', 'uses' => 'InspectionController@getApproved']);// APPROVED 
+Route::get('inspections/rejected', ['as' => 'inspections.rejected', 'uses' => 'InspectionController@getRejected']);
 // Inspect
 Route::get('inspections/inspect/{id}', ['as' => 'inspections.inspect', 'uses' => 'InspectionController@getInspect']);
 Route::post('inspections/inspect', ['as' => 'inspections.notify', 'uses' => 'InspectionController@postInspect']);
@@ -62,6 +65,7 @@ Route::post('inspections/approve/{id}', ['as' => 'inspections.approvepost', 'use
 
 // Reject
 Route::get('inspections/reject/{id}', ['as' => 'inspections.reject', 'uses' => 'InspectionController@getReject']);
+Route::post('inspections/reject/{id}', ['as' => 'inspections.rejectpost', 'uses' => 'InspectionController@postReject']);
 
 // Response
 Route::get('inspections/inspect/response/{id}', ['as' => 'inspections.response', 'uses' => 'InspectionController@getResponse']);

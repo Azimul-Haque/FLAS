@@ -95,3 +95,25 @@
 .navbar-default{
     background: white !important;
 }
+
+
+.vertical-menu-toggle:link {
+    text-decoration: none;
+}
+
+.vertical-menu-toggle:visited {
+    text-decoration: none;
+} 
+
+.vertical-menu-toggle:hover {
+    text-decoration: none;
+    color: #777;
+}
+
+.vertical-menu-toggle:active {
+    text-decoration: none;
+}
+
+.vertical-menu-panel:hover {
+    background-color: #fff !important;
+}

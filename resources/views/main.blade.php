@@ -15,16 +15,6 @@
     {!!Html::style('css/font-awesome.min.css')!!}
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <style type="text/css">
-        @font-face {
-        font-family: MyAdorshoLipi;
-        src: url(fonts/AdorshoLipi.ttf);
-        }
-        @font-face {
-            font-family: MyLato;
-            src: url(fonts/Lato-Regular.ttf);
-        }
-    </style>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -72,7 +62,11 @@
               <ul class="dropdown-menu">
                 <li class=""><a href="{{ route('inspections.pending') }}"><i class="fa fa-hourglass-start" aria-hidden="true"></i> Pending Applications</a></li>
                 <li role="separator" class="divider"></li>
+                <li class=""><a href="{{ route('inspections.inspected') }}"><i class="fa fa-hourglass-half" aria-hidden="true"></i> Inspected Applications</a></li>
+                <li role="separator" class="divider"></li>
                 <li class=""><a href="{{ route('inspections.approved') }}"><i class="fa fa-check" aria-hidden="true"></i> Approved Applications</a></li>
+                <li role="separator" class="divider"></li>
+                <li class=""><a href="{{ route('inspections.rejected') }}"><i class="fa fa-ban" aria-hidden="true"></i> Rejected Applications</a></li>
               </ul>
             </li>
             @endrole
@@ -112,62 +106,98 @@
           <div class="row">
             <div class="col-md-2">
                 <div class="panel-group" id="accordion">
+                  @role('Admin')
                   <div class="panel panel-default">
-                    <div class="panel-heading">
+                    <div class="panel-heading vertical-menu-panel vertical-menu-panel">
                       <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><i class="fa fa-cogs" aria-hidden="true"></i> Collapsible Group 1</a>
+                        <a class="vertical-menu-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse1"><i class="fa fa-cogs" aria-hidden="true"></i>  Admin <span class="caret"></span></a> 
                       </h4>
                     </div>
-                    <div id="collapse1" class="panel-collapse collapse">
+                    <div id="collapse1" class="panel-collapse collapse
+                    @role('Admin')
+                    in
+                    @endrole
+                    ">
                       <ul class="list-group">
-                        <li class="list-group-item">One</li>
-                        <li class="list-group-item">Two</li>
-                        <li class="list-group-item">Three</li>
+                        <li class="list-group-item">
+                          <a href="{{ url('/admin') }}"><i class="fa fa-users" aria-hidden="true"></i> Manage Users</a>
+                        </li>
+                        <li class="list-group-item">
+                          <a href="{{ url('/roles') }}"><i class="fa fa-wrench" aria-hidden="true"></i> Manage Roles</a>
+                        </li>
                       </ul>
                     </div>
                   </div>
-                  <div class="panel panel-default">
-                    <div class="panel-heading">
+                  @endrole
+                  @role('Inspector')
+                  <div class="panel panel-default ">
+                    <div class="panel-heading vertical-menu-panel">
                       <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2"><i class="fa fa-cogs" aria-hidden="true"></i> Collapsible Group 2</a>
+                        <a class="vertical-menu-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse2"><i class="fa fa-list-ol" aria-hidden="true"></i> Inspection <span class="caret"></span></a>
                       </h4>
                     </div>
-                    <div id="collapse2" class="panel-collapse collapse">
+                    <div id="collapse2" class="panel-collapse collapse
+                    @role('Inspector')
+                    in
+                    @endrole
+                    ">
                       <ul class="list-group">
-                        <li class="list-group-item">One</li>
-                        <li class="list-group-item">Two</li>
-                        <li class="list-group-item">Three</li>
+                        <li class="list-group-item">
+                          <a href="{{ route('inspections.pending') }}"><i class="fa fa-hourglass-start" aria-hidden="true"></i> Pending Applications</a>
+                        </li>
+                        <li class="list-group-item">
+                          <a href="{{ route('inspections.inspected') }}"><i class="fa fa-hourglass-half" aria-hidden="true"></i> Inspected Applications</a>
+                        </li>
+                        <li class="list-group-item">
+                          <a href="{{ route('inspections.approved') }}"><i class="fa fa-check" aria-hidden="true"></i> Approved Applications</a>
+                        </li>
+                        <li class="list-group-item">
+                          <a href="{{ route('inspections.rejected') }}"><i class="fa fa-ban" aria-hidden="true"></i> Rejected Applications</a>
+                        </li>
                       </ul>
                     </div>
                   </div>
-                  <div class="panel panel-default">
-                    <div class="panel-heading">
+                  @endrole
+                  @role('Applicant')
+                  <div class="panel panel-default ">
+                    <div class="panel-heading vertical-menu-panel">
                       <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3"><i class="fa fa-cogs" aria-hidden="true"></i> Collapsible Group 3</a>
+                        <a class="vertical-menu-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse3"><i class="fa fa-address-card" aria-hidden="true"></i> Application <span class="caret"></span></a>
                       </h4>
                     </div>
-                    <div id="collapse3" class="panel-collapse collapse">
+                    <div id="collapse3" class="panel-collapse collapse
+                    @role('Applicant')
+                    in
+                    @endrole
+                    ">
                       <ul class="list-group">
-                        <li class="list-group-item">One</li>
-                        <li class="list-group-item">Two</li>
-                        <li class="list-group-item">Three</li>
+                        <li class="list-group-item">
+                          <a href="{{route('applications.create')}}"><i class="fa fa-file-word-o" aria-hidden="true"></i> Application</a>
+                        </li>
                       </ul>
                     </div>
                   </div>
-                  <div class="panel panel-default">
-                    <div class="panel-heading">
+                  @endrole
+                  @role('Rapporteur')
+                  <div class="panel panel-default ">
+                    <div class="panel-heading vertical-menu-panel">
                       <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3"><i class="fa fa-cogs" aria-hidden="true"></i> Collapsible Group 3</a>
+                        <a class="vertical-menu-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse4"><i class="fa fa-file-text" aria-hidden="true"></i> Report <span class="caret"></span></a>
                       </h4>
                     </div>
-                    <div id="collapse3" class="panel-collapse collapse">
+                    <div id="collapse4" class="panel-collapse collapse
+                    @role('Rapporteur')
+                    in
+                    @endrole
+                    ">
                       <ul class="list-group">
-                        <li class="list-group-item">One</li>
-                        <li class="list-group-item">Two</li>
-                        <li class="list-group-item">Three</li>
+                        <li class="list-group-item">
+                          <a href="#"><i class="fa fa-bar-chart" aria-hidden="true"></i> Generate Report</a>
+                        </li>
                       </ul>
                     </div>
                   </div>
+                  @endrole
                 </div>
             </div>
           <div class="col-md-10">
