@@ -28,7 +28,7 @@
 				<div class="row">
 					<div class="col-md-6">
 					{!! Form::label('password', 'Password:', array('class' => 'form-spacing-top')) !!}
-			 		{!! Form::password('password', array('class' => 'form-control' , 'required' => '', 'minlength' => '6')) !!}	
+			 		{!! Form::password('password', array('class' => 'form-control' , 'required' => '', 'data-parsley-minlength' => '8', 'data-parsley-pattern' => '/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/', 'data-parsley-pattern-message' => 'Minimum 8 characters, should contain atleast 1 uppercase, 1 lowercase and 1 number')) !!}	
 					</div>
 
 					<div class="col-md-6">
