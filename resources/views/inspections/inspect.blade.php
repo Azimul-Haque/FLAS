@@ -27,7 +27,7 @@
 @else
 		{!! Form::open(['route' => 'inspections.notify', 'data-parsley-validate' => '', 'method' => 'POST']) !!}
 		<div class="col-md-8">
-			<h1 class="">Application View</h1>
+			<h1 class="">Application Inspection-Phase 1</h1>
 			<table class="table">
 				<thead>
 					<tr>
@@ -121,15 +121,16 @@
 				<hr>
 				<div class="row">
 					<div class="col-sm-12">
-
             			{{Form::button('<i class="fa fa-envelope" aria-hidden="true"></i> Notify Applicant', array('type' => 'submit', 'class' => 'btn btn-primary btn-block'))}}
 					</div>
 				</div>
 				<div class="row" style="margin-top: 10px;">
-					<div class="col-sm-6">
-					<a class="btn btn-success btn-block" href="{{ route('inspections.approve',$application->id) }}"><i class="fa fa-check-square-o" aria-hidden="true"></i> Approve</a>
+					<div class="col-sm-12">
+					<a class="btn btn-success btn-block" href="{{ route('inspections.getPhase2',$application->id) }}"><i class="fa fa-step-forward" aria-hidden="true"></i> Enter Phase 2</a>
 					</div>
-					<div class="col-sm-6">
+				</div>
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-sm-12">
 					<a class="btn btn-danger btn-block" href="{{ route('inspections.reject',$application->id) }}"><i class="fa fa-ban" aria-hidden="true"></i> Reject</a>
 					</div>
 				</div>	

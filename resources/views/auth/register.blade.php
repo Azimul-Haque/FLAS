@@ -1,6 +1,6 @@
 @extends('main')
 
-@section('title', 'Blog | Regiter')
+@section('title', 'FLAS | Regiter')
 @section('stylesheet')
 	{!!Html::style('css/parsley.css')!!}
 @endsection

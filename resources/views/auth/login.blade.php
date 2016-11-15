@@ -1,6 +1,6 @@
 @extends('main')
 
-@section('title', 'Blog | Login')
+@section('title', 'FLAS | Login')
 @section('stylesheet')
 	{!!Html::style('css/parsley.css')!!}
 @endsection

@@ -14,7 +14,7 @@ class AddColumnsToApplicationsTable extends Migration
     {
         Schema::table('applications', function (Blueprint $table) {
             $table->string('license_number')->after('image');
-            $table->string('expiry_date'); 
+            $table->timestamp('expiry_date')->nullable(); 
         });
     }
 

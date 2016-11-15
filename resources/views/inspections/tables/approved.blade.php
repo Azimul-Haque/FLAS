@@ -13,7 +13,7 @@
   <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Application Management</h2>
+                <h2>Approved Applications</h2>
             </div>
         </div>
     </div>
@@ -37,9 +37,8 @@
         @if ($application->application_status_id > 1)
         <a class="btn btn-primary btn-sm" href="{{ route('inspections.edit',$application->id) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Inspect Again</a>
         @else
-        <a class="btn btn-primary btn-sm" href="{{ route('inspections.inspect',$application->id) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Inspect</a>
+        <a class="btn btn-primary btn-sm" href="{{ route('inspections.inspect',$application->id) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Inspect Application</a>
         @endif
-        <a class="btn btn-success btn-sm" href="{{ route('inspections.approve',$application->id) }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Approve</a>
       </td>
     </tr>
     @endforeach

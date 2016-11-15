@@ -47,7 +47,7 @@
                 @foreach($permission as $value)
                   <label>{{ Form::checkbox('permission[]', $value->id, false, array('class' => 'name')) }}
                   {{ $value->display_name }}</label>
-                  <br/>
+                  
                 @endforeach
             </div>
         </div>

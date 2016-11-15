@@ -9,6 +9,8 @@ use Validator, Input, Redirect, Session;
 use App\Application;
 use App\Inspection;
 use Mail;
+use Carbon\Carbon;
+use PDF;
 
 class InspectionController extends Controller
 {
@@ -71,6 +73,19 @@ class InspectionController extends Controller
                 ->withApplications($applications);
     }
 
+    public function getExpired()
+    {
+        $today = Carbon::today();
+        $startday = '1971-16-12 12:00:00';
+        $applications = Application::orderBy('id','DESC')
+                        ->whereDate('expiry_date','<', $today)
+                        ->whereDate('expiry_date','>', $startday)
+                        ->where('application_status_id', '=', 3)
+                        ->paginate(5);
+
+        return view('inspections.tables.expired')
+                ->withApplications($applications);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -209,13 +224,18 @@ class InspectionController extends Controller
         return view('inspections.response')->withApplication($application);
     }
 
-/*
-    public function getInspectAgain($id)
+
+    public function getPhase2($id)
     {
         $application = Application::find($id);
-        return view('inspections.inspect')->withApplication($application);
+        return view('inspections.phase2')->withApplication($application);
     }
-*/
+    
+    public function postPhase2(Request $request, $id)
+    {
+        
+    }
+
 
 
 
@@ -376,6 +396,14 @@ class InspectionController extends Controller
 
         //redirect
         return redirect()->route('inspections.response', $application->id);
+    }
+
+    //PDF TESTING
+    public function getPDF($id) {
+        $application = Application::find($id);
+        //$pdf = PDF::loadHTML('<h1>'.$application->id.'</h1>')->setPaper('a4', 'portrait')->setWarnings(false);
+        $pdf = PDF::loadView('pdf.index', compact('application'))->setPaper('a4', 'portrait')->setWarnings(false);
+        return $pdf->stream();
     }
 
     public function getReject($id) {

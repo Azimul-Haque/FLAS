@@ -11,7 +11,7 @@
 @section('content')
 
 	<div class="row">
-		<div class="col-md-8">
+		<div class="col-md-7">
 			<h1 class="">Application Inspection-Phase 2</h1>
 			<table class="table">
 				<thead>
@@ -59,17 +59,17 @@
 				</thead>
 			</table>			
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-5">
 			<div class="well">
 				<span style="font-size: 25px; ">
-				<strong>Applicantion Approval</strong></span>
-				{!! Form::open(['route' => ['inspections.approvepost', $application->id], 'data-parsley-validate' => '', 'method' => 'POST']) !!}
+				<strong>Phase 2 Verification</strong></span>
+				{!! Form::open(['route' => ['inspections.postPhase2', $application->id], 'data-parsley-validate' => '', 'method' => 'POST']) !!}
 
 					{!! Form::hidden('application_id', $application->id) !!}
 					{!! Form::hidden('email', $application->email) !!}
 
-			 		{!! Form::label('approval_message', 'Approval Message', ['style' => 'margin-top: 10px;']) !!}
-			 		{!! Form::textarea('approval_message', 'Your application has been accepted by the authority of BFSCD. Your license number is the following number.', array('class' => 'form-control', 'required' => '', 'rows' => '4')) !!}
+			 		{!! Form::label('varification_message', 'Phase 2 Verification Message', ['style' => 'margin-top: 10px;']) !!}
+			 		{!! Form::textarea('varification_message', 'Your application has been accepted by the authority of BFSCD. Your license number is the following number.', array('class' => 'form-control', 'required' => '', 'rows' => '4')) !!}
 
 			 		{!! Form::label('license_number', 'License Number', ['class' => 'form-spacing-top']) !!}
 			 		{!! Form::text('license_number', null, array('class' => 'form-control', 'required' => '')) !!}
@@ -84,9 +84,14 @@
                     </div> 
 
 				
-				<div class="row form-spacing-top">
+				<div class="row">
 					<div class="col-sm-12">
-            			{{Form::button('<i class="fa fa-envelope" aria-hidden="true"></i> Approve &amp; Notify Applicant', array('type' => 'submit', 'class' => 'btn btn-success btn-block'))}}
+            			{{Form::button('<i class="fa fa-envelope" aria-hidden="true"></i> Notify Applicant', array('type' => 'submit', 'class' => 'btn btn-primary btn-block'))}}
+					</div>
+				</div>
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-sm-12">
+					<a class="btn btn-success btn-block" href="{{ route('inspections.approve',$application->id) }}"><i class="fa fa-check" aria-hidden="true"></i> Approve</a>
 					</div>
 				</div>
 				{!! Form::close() !!}

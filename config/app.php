@@ -160,6 +160,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         App\Providers\EntrustCustomServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
     ],
 
@@ -211,6 +212,7 @@ return [
         'Purifier' => Mews\Purifier\Facades\Purifier::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 

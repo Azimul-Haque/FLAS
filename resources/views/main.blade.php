@@ -37,7 +37,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">FLAS</a>
+          <a class="navbar-brand" href="/">Fire License Automation System</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling-->
@@ -67,6 +67,8 @@
                 <li class=""><a href="{{ route('inspections.approved') }}"><i class="fa fa-check" aria-hidden="true"></i> Approved Applications</a></li>
                 <li role="separator" class="divider"></li>
                 <li class=""><a href="{{ route('inspections.rejected') }}"><i class="fa fa-ban" aria-hidden="true"></i> Rejected Applications</a></li>
+                <li role="separator" class="divider"></li>
+                <li class=""><a href="{{ route('inspections.expired') }}"><i class="fa fa-clock-o" aria-hidden="true"></i> Expired Applications</a></li>
               </ul>
             </li>
             @endrole
@@ -153,6 +155,9 @@
                         </li>
                         <li class="list-group-item">
                           <a href="{{ route('inspections.rejected') }}"><i class="fa fa-ban" aria-hidden="true"></i> Rejected Applications</a>
+                        </li>
+                        <li class="list-group-item">
+                          <a href="{{ route('inspections.expired') }}"><i class="fa fa-clock-o" aria-hidden="true"></i> Expired Applications</a>
                         </li>
                       </ul>
                     </div>

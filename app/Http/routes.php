@@ -53,15 +53,26 @@ Route::get('inspections/pending', ['as' => 'inspections.pending', 'uses' => 'Ins
 // INSPECTED
 Route::get('inspections/inspected', ['as' => 'inspections.inspected', 'uses' => 'InspectionController@getInspected']);
 // APPROVED 
-Route::get('inspections/approved', ['as' => 'inspections.approved', 'uses' => 'InspectionController@getApproved']);// APPROVED 
+Route::get('inspections/approved', ['as' => 'inspections.approved', 'uses' => 'InspectionController@getApproved']);
+// REJECTED 
 Route::get('inspections/rejected', ['as' => 'inspections.rejected', 'uses' => 'InspectionController@getRejected']);
-// Inspect
-Route::get('inspections/inspect/{id}', ['as' => 'inspections.inspect', 'uses' => 'InspectionController@getInspect']);
-Route::post('inspections/inspect', ['as' => 'inspections.notify', 'uses' => 'InspectionController@postInspect']);
+// EXPIRED 
+Route::get('inspections/expired', ['as' => 'inspections.expired', 'uses' => 'InspectionController@getExpired']);
+
+// Inspect  Phase 1
+Route::get('inspections/inspect/phase/1/{id}', ['as' => 'inspections.inspect', 'uses' => 'InspectionController@getInspect']);
+Route::post('inspections/inspect/phase/1', ['as' => 'inspections.notify', 'uses' => 'InspectionController@postInspect']);
+
+// Inspect  Phase 2
+Route::get('inspections/inspect/phase/2/{id}', ['as' => 'inspections.getPhase2', 'uses' => 'InspectionController@getPhase2']);
+Route::post('inspections/inspect/phase/2/{id}', ['as' => 'inspections.postPhase2', 'uses' => 'InspectionController@postPhase2']);
+
 
 // Approve 
 Route::get('inspections/approve/{id}', ['as' => 'inspections.approve', 'uses' => 'InspectionController@getApprove']);
 Route::post('inspections/approve/{id}', ['as' => 'inspections.approvepost', 'uses' => 'InspectionController@postApprove']);
+// PDF TESTING
+Route::get('/pdf/{id}', 'InspectionController@getPDF');
 
 // Reject
 Route::get('inspections/reject/{id}', ['as' => 'inspections.reject', 'uses' => 'InspectionController@getReject']);

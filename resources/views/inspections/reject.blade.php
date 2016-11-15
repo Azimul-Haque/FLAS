@@ -11,7 +11,7 @@
 
 	<div class="row">
 		<div class="col-md-8">
-			<h1 class="">Application View</h1>
+			<h1 class="">Application Inspection-Reject</h1>
 			<table class="table">
 				<thead>
 					<tr>
