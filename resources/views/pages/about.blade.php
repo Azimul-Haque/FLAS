@@ -24,7 +24,7 @@ Notice 2 Notice 3 Notice 4 Notice 5 Notice 6 Notice 7 Notice 8 Notice 9 Notice 1
               This is the sample about page. Sample text. 
             </div>
           </div>
-          <script src="https://gist.github.com/Azimul-Haque/bc8feaa27d46474bcd70165efad714fd.js"></script>
+          {{-- <script src="https://gist.github.com/Azimul-Haque/bc8feaa27d46474bcd70165efad714fd.js"></script> --}}
 
 
         </div>

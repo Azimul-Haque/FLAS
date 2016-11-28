@@ -8,8 +8,8 @@
 @section('content')
 
 	<div class="row">
-		<div class="col-md-4 col-md-offset-4">
-			<h1>Login</h1>
+		<div class="col-md-4 col-md-offset-4 well" >
+			<h1>Login | <a href="{{ url('auth/register') }}">Register</a></h1>
 			<hr>
 			{!! Form::open(['data-parsley-validate' => '']) !!}
 			 	{!! Form::label('email', 'Email:') !!}

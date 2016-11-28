@@ -58,8 +58,20 @@ class ApplicationController extends Controller
             'ceo'                => 'required|max:255',
             'address'            => 'required|min:30|max:255',
             'employees'          => 'required|integer',
-            'estd'               => 'required|integer',
-            'image'              => 'sometimes|image|max:300'
+            'area'               => 'required|integer',
+            'fire_extinguisher'  => 'required|integer',
+            'fire_extinguisher_exp_date'  => 'required|max:255',
+            'rod_breaker'        => 'required|integer',
+            'emergency_exit'     => 'required|integer',
+            'storey'             => 'required|integer',
+            'nearest_buildings'  => 'required|integer',
+            'estd'               => 'required|integer', 
+            'company_type'       => 'required|max:300', 
+            'layoutplan'         => 'required|max:300',
+            'ownershipdocument'  => 'required|max:300',
+            'tradelicense'       => 'required|max:300',
+            'tinpaper'           => 'required|max:300',
+            'bankcertificate'    => 'required|max:300'
        ));
 
 
@@ -77,19 +89,51 @@ class ApplicationController extends Controller
         $application->ceo = $request->ceo;
         $application->address = $request->address;
         $application->employees = $request->employees;
+        $application->area = $request->area;
+        $application->fire_extinguisher = $request->fire_extinguisher;
+        $application->fire_extinguisher_exp_date = $request->fire_extinguisher_exp_date;
+        $application->rod_breaker = $request->rod_breaker;
+        $application->emergency_exit = $request->emergency_exit;
+        $application->storey = $request->storey;
+        $application->nearest_buildings = $request->nearest_buildings;
         $application->estd = $request->estd;
+        $application->company_type = $request->company_type;
 
-        // image upload
-        if($request->hasFile('image')) {
-            $image      = $request->file('image');
-            $filename   = time(). '.' . $image->getClientOriginalExtension(); 
-            $location   = public_path('images/' . $filename);
-
-            Image::make($image)->resize(800, null, function ($constraint) {
-            $constraint->aspectRatio();
-            })->save($location);
-
-            $application->image = $filename;
+        // file upload
+        if($request->hasFile('layoutplan')) {
+            $layoutplan      = $request->file('layoutplan');
+            $filename   = 'layoutplan' .time(). '.' . $layoutplan->getClientOriginalExtension(); 
+            $location   = public_path('files/' . $request->email);
+            $request->file('layoutplan')->move($location, $filename);
+            $application->layoutplan = $filename;
+        }
+        if($request->hasFile('ownershipdocument')) {
+            $ownershipdocument      = $request->file('ownershipdocument');
+            $filename   = 'ownershipdocument' .time(). '.' . $ownershipdocument->getClientOriginalExtension(); 
+            $location   = public_path('files/' . $request->email);
+            $request->file('ownershipdocument')->move($location, $filename);
+            $application->ownershipdocument = $filename;
+        }
+        if($request->hasFile('tradelicense')) {
+            $tradelicense      = $request->file('tradelicense');
+            $filename   = 'tradelicense' .time(). '.' . $tradelicense->getClientOriginalExtension(); 
+            $location   = public_path('files/' . $request->email);
+            $request->file('tradelicense')->move($location, $filename);
+            $application->tradelicense = $filename;
+        }
+        if($request->hasFile('tinpaper')) {
+            $tinpaper      = $request->file('tinpaper');
+            $filename   = 'tinpaper' .time(). '.' . $tinpaper->getClientOriginalExtension(); 
+            $location   = public_path('files/' . $request->email);
+            $request->file('tinpaper')->move($location, $filename);
+            $application->tinpaper = $filename;
+        }
+        if($request->hasFile('bankcertificate')) {
+            $bankcertificate      = $request->file('bankcertificate');
+            $filename   = 'bankcertificate' .time(). '.' . $bankcertificate->getClientOriginalExtension(); 
+            $location   = public_path('files/' . $request->email); 
+            $request->file('bankcertificate')->move($location, $filename);
+            $application->bankcertificate = $filename;
         }
 
         $application->save();
@@ -142,29 +186,43 @@ class ApplicationController extends Controller
         //validation
         if($request->email == $application->email){
             $this->validate($request, array(
-                'company_name'       => 'required|max:255',
-                'email'              => 'required|max:255',
-                'phone'              => 'required|max:255',
-                'owner'              => 'required|max:255',
-                'chairman'           => 'required|max:255',
-                'ceo'                => 'required|max:255',
-                'address'            => 'required|min:30|max:255',
-                'employees'          => 'required|integer',
-                'estd'               => 'required|integer',
-                'image'              => 'sometimes|image|max:300'
+            'company_name'       => 'required|max:255',
+            'email'              => 'required|max:255',
+            'phone'              => 'required|max:255',
+            'owner'              => 'required|max:255',
+            'chairman'           => 'required|max:255',
+            'ceo'                => 'required|max:255',
+            'address'            => 'required|min:30|max:255',
+            'employees'          => 'required|integer',
+            'area'               => 'required|integer',
+            'fire_extinguisher'  => 'required|integer',
+            'fire_extinguisher_exp_date'  => 'required|max:255',
+            'rod_breaker'        => 'required|integer',
+            'emergency_exit'     => 'required|integer',
+            'storey'             => 'required|integer',
+            'nearest_buildings'  => 'required|integer',
+            'estd'               => 'required|integer',
+            'company_type'       => 'required|max:255'
            ));
         } else {
             $this->validate($request, array(
-                'company_name'       => 'required|max:255',
-                'email'              => 'required|unique:applications,email|max:255',
-                'phone'              => 'required|max:255',
-                'owner'              => 'required|max:255',
-                'chairman'           => 'required|max:255',
-                'ceo'                => 'required|max:255',
-                'address'            => 'required|min:30|max:255',
-                'employees'          => 'required|integer',
-                'estd'               => 'required|integer',
-                'image'              => 'sometimes|image|max:300'
+            'company_name'       => 'required|max:255',
+            'email'              => 'required|unique:applications,email|max:255',
+            'phone'              => 'required|max:255',
+            'owner'              => 'required|max:255',
+            'chairman'           => 'required|max:255',
+            'ceo'                => 'required|max:255',
+            'address'            => 'required|min:30|max:255',
+            'employees'          => 'required|integer',
+            'area'               => 'required|integer',
+            'fire_extinguisher'  => 'required|integer',
+            'fire_extinguisher_exp_date'  => 'required|max:255',
+            'rod_breaker'        => 'required|integer',
+            'emergency_exit'     => 'required|integer',
+            'storey'             => 'required|integer',
+            'nearest_buildings'  => 'required|integer',
+            'estd'               => 'required|integer',
+            'company_type'       => 'required|max:255'
            ));
         }
 
@@ -183,19 +241,46 @@ class ApplicationController extends Controller
         $application->ceo = $request->ceo;
         $application->address = $request->address;
         $application->employees = $request->employees;
+        $application->area = $request->area;
+        $application->fire_extinguisher = $request->fire_extinguisher;
+        $application->fire_extinguisher_exp_date = $request->fire_extinguisher_exp_date;
+        $application->rod_breaker = $request->rod_breaker;
+        $application->emergency_exit = $request->emergency_exit;
+        $application->storey = $request->storey;
+        $application->nearest_buildings = $request->nearest_buildings;
         $application->estd = $request->estd;
+        $application->company_type = $request->company_type;
 
-        // image upload
-        if($request->hasFile('image')) {
-            $image      = $request->file('image');
-            $filename   = time(). '.' . $image->getClientOriginalExtension(); 
-            $location   = public_path('images/' . $filename);
-
-            Image::make($image)->resize(800, null, function ($constraint) {
-            $constraint->aspectRatio();
-            })->save($location);
-
-            $application->image = $filename;
+        // file upload
+        if($request->hasFile('layoutplan')) {
+            $layoutplan      = $request->file('layoutplan');
+            $filename   = $application->layoutplan; 
+            $location   = public_path('files/' . $request->email);
+            $request->file('layoutplan')->move($location, $filename);
+        }
+        if($request->hasFile('ownershipdocument')) {
+            $ownershipdocument      = $request->file('ownershipdocument');
+            $filename   = $application->ownershipdocument; 
+            $location   = public_path('files/' . $request->email);
+            $request->file('ownershipdocument')->move($location, $filename);
+        }
+        if($request->hasFile('tradelicense')) {
+            $tradelicense      = $request->file('tradelicense');
+            $filename   = $application->tradelicense; 
+            $location   = public_path('files/' . $request->email);
+            $request->file('tradelicense')->move($location, $filename);
+        }
+        if($request->hasFile('tinpaper')) {
+            $tinpaper      = $request->file('tinpaper');
+            $filename   = $application->tinpaper; 
+            $location   = public_path('files/' . $request->email);
+            $request->file('tinpaper')->move($location, $filename);
+        }
+        if($request->hasFile('bankcertificate')) {
+            $bankcertificate      = $request->file('bankcertificate');
+            $filename   = $application->bankcertificate; 
+            $location   = public_path('files/' . $request->email); 
+            $request->file('bankcertificate')->move($location, $filename);
         }
 
         $application->save();

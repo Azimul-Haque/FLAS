@@ -366,13 +366,27 @@ class InspectionController extends Controller
             'email'                      => 'required|email',
             'approval_message'           => 'required',
             'license_number'             => 'required|max:255',
-            'expiry_date'               => 'required|max:255'
+            'expiry_date'                => 'required|max:255'
        ));
 
        // Turn Application Status INSPECTED to APPROVED
         $application->application_status_id = 3;
         $application->is_editable = 0;
-        $application->license_number = $request->license_number;
+
+        //generate license number
+        $year = date('dmy');
+        $characters = 'ABCDE01FGHIJ23KLMNO45PQRST67UVWXYZ89';
+        $unique = '';
+        $max = strlen($characters) - 1;
+        for ($i = 0; $i < 4; $i++) {
+            $unique .= $characters[mt_rand(0, $max)];
+        }
+        $expiry_date_year = substr($request->expiry_date, 2, 2);
+        $expiry_date_month = substr($request->expiry_date, 5, 2);
+        $expiry_date_day = substr($request->expiry_date, 8, 2);
+        $expiry_date_date_for_license = $expiry_date_day.$expiry_date_month.$expiry_date_year;
+
+        $application->license_number = $year.$application->company_type.$unique.$expiry_date_date_for_license;
         $application->expiry_date = $request->expiry_date;
         $application->save();
 
@@ -383,7 +397,7 @@ class InspectionController extends Controller
             'email' => $request->email,
             'subject' => 'FLAS Application Inspection Report',
             'approval_message' => $request->approval_message,
-            'license_number' => $request->license_number,
+            'license_number' => $year.$application->company_type.$unique.$expiry_date_date_for_license,
             'expiry_date' => $request->expiry_date
             );
         Mail::send('emails.approve', $data, function($message) use ($data){

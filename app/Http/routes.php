@@ -72,7 +72,7 @@ Route::post('inspections/inspect/phase/2/{id}', ['as' => 'inspections.postPhase2
 Route::get('inspections/approve/{id}', ['as' => 'inspections.approve', 'uses' => 'InspectionController@getApprove']);
 Route::post('inspections/approve/{id}', ['as' => 'inspections.approvepost', 'uses' => 'InspectionController@postApprove']);
 // PDF TESTING
-Route::get('/pdf/{id}', 'InspectionController@getPDF');
+Route::get('/pdf/{id}', 'InspectionController@getPDF'); 
 
 // Reject
 Route::get('inspections/reject/{id}', ['as' => 'inspections.reject', 'uses' => 'InspectionController@getReject']);
