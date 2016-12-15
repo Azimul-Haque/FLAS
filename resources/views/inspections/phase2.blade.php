@@ -68,33 +68,25 @@
 					{!! Form::hidden('application_id', $application->id) !!}
 					{!! Form::hidden('email', $application->email) !!}
 
-			 		{!! Form::label('varification_message', 'Phase 2 Verification Message', ['style' => 'margin-top: 10px;']) !!}
-			 		{!! Form::textarea('varification_message', 'Your application has been accepted by the authority of BFSCD. Your license number is the following number.', array('class' => 'form-control', 'required' => '', 'rows' => '4')) !!}
-
-			 		{!! Form::label('license_number', 'License Number', ['class' => 'form-spacing-top']) !!}
-			 		{!! Form::text('license_number', null, array('class' => 'form-control', 'required' => '')) !!}
-
-			 		<div class="form-group form-spacing-top">
-                        {!!Form::label('expiry_date', 'License Expires') !!}    
-                        <div class="input-group date">
-                        <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
-                            {!!Form::text('expiry_date', null, ['class'=>'form-control']) !!}
-                            
-                        </div>    
-                    </div> 
-
-				
+			 		{!! Form::label('phase_2_message', 'Phase 2 Verification Message', ['style' => 'margin-top: 10px;']) !!}
+			 		{!! Form::textarea('phase_2_message', null, array('class' => 'form-control', 'required' => '', 'rows' => '4')) !!} 
+			 	<br/>					
 				<div class="row">
 					<div class="col-sm-12">
             			{{Form::button('<i class="fa fa-envelope" aria-hidden="true"></i> Notify Applicant', array('type' => 'submit', 'class' => 'btn btn-primary btn-block'))}}
 					</div>
 				</div>
+				{!! Form::close() !!}
+			</div>
+			<div class="well">
 				<div class="row" style="margin-top: 10px;">
 					<div class="col-sm-12">
+					<span style="font-size: 25px;">
+					<strong>Proceed to 'Approve'</strong><br/></span>
+					<br/>
 					<a class="btn btn-success btn-block" href="{{ route('inspections.approve',$application->id) }}"><i class="fa fa-check" aria-hidden="true"></i> Approve</a>
 					</div>
 				</div>
-				{!! Form::close() !!}
 			</div>
 		</div>
 

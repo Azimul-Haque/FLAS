@@ -43,9 +43,6 @@
         <!-- Collect the nav links, forms, and other content for toggling-->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            @if(Auth::check())
-            <li class=""><a href="{{ url('/home') }}"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
-            @endif
             @role('Admin')
             <li class="dropdown">
               <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cogs" aria-hidden="true"></i>  Admin <span class="caret"></span></a>
@@ -74,6 +71,9 @@
             @endrole
             @role('Applicant')
             <li class=""><a href="{{route('applications.create')}}"><i class="fa fa-address-card" aria-hidden="true"></i> Application</a></li>
+            @endrole
+            @role('Rapporteur')
+            <li class=""><a href="{{ url('reports/') }}"><i class="fa fa-bar-chart" aria-hidden="true"></i> Generate Report</a></li>
             @endrole
             <li><a href="{{ url('/about') }}"><i class="fa fa-address-book-o" aria-hidden="true"></i> About</a></li>
             <li><a href="{{ url('/contact') }}"><i class="fa fa-envelope-o" aria-hidden="true"></i> Contact</a></li>
@@ -197,7 +197,7 @@
                     ">
                       <ul class="list-group">
                         <li class="list-group-item">
-                          <a href="#"><i class="fa fa-bar-chart" aria-hidden="true"></i> Generate Report</a>
+                          <a href="{{ url('reports/') }}"><i class="fa fa-bar-chart" aria-hidden="true"></i> Generate Report</a>
                         </li>
                       </ul>
                     </div>

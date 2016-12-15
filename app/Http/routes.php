@@ -33,6 +33,8 @@ Route::post('password/reset', 'Auth\PasswordController@reset');
 
 // Application Controller
 Route::resource('applications', 'ApplicationController');
+// License PDF export
+Route::get('license/pdf/{id}', 'ApplicationController@getPDF');  
 
 // Admin Controller
 Route::resource('admin', 'AdminController');
@@ -71,8 +73,6 @@ Route::post('inspections/inspect/phase/2/{id}', ['as' => 'inspections.postPhase2
 // Approve 
 Route::get('inspections/approve/{id}', ['as' => 'inspections.approve', 'uses' => 'InspectionController@getApprove']);
 Route::post('inspections/approve/{id}', ['as' => 'inspections.approvepost', 'uses' => 'InspectionController@postApprove']);
-// PDF TESTING
-Route::get('/pdf/{id}', 'InspectionController@getPDF'); 
 
 // Reject
 Route::get('inspections/reject/{id}', ['as' => 'inspections.reject', 'uses' => 'InspectionController@getReject']);
@@ -80,3 +80,18 @@ Route::post('inspections/reject/{id}', ['as' => 'inspections.rejectpost', 'uses'
 
 // Response
 Route::get('inspections/inspect/response/{id}', ['as' => 'inspections.response', 'uses' => 'InspectionController@getResponse']);
+
+// Report Generation Controller
+Route::get('/reports', 'ReportController@getIndex');
+// Export file as excel (.xlxs) format
+Route::get('/reports/export/pending/excel', 'ReportController@getExcelPending');
+Route::get('/reports/export/inspected/excel', 'ReportController@getExcelInspected');
+Route::get('/reports/export/approved/excel', 'ReportController@getExcelApproved');
+Route::get('/reports/export/rejected/excel', 'ReportController@getExcelRejected');
+Route::get('/reports/export/expired/excel', 'ReportController@getExcelExpired');
+// Export file as PDF (.pdf) format
+Route::get('/reports/export/pending/pdf', 'ReportController@getPDFPending');
+Route::get('/reports/export/inspected/pdf', 'ReportController@getPDFInspected');
+Route::get('/reports/export/approved/pdf', 'ReportController@getPDFApproved');
+Route::get('/reports/export/rejected/pdf', 'ReportController@getPDFRejected');
+Route::get('/reports/export/expired/pdf', 'ReportController@getPDFExpired');

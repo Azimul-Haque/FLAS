@@ -18,6 +18,10 @@
 					<th>Expiry Date</th>
 					<td>: {{ $expiry_date }}</td>
 				</tr>
+				<tr> 
+					<th>Download License File:</th>
+					<td>: {{ url('/license/pdf/'.$id) }}</td>
+				</tr>
 			</table>
 		</div>
 

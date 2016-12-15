@@ -16,6 +16,7 @@ class CreateApplicationTable extends Migration
             $table->increments('id');
             $table->integer('created_by_id')->unsigned();
             $table->integer('application_status_id')->unsigned();
+            $table->string('tracking_number')->unique();
             $table->integer('is_editable')->unsigned();
             $table->string('company_name');
             $table->string('email')->unique();

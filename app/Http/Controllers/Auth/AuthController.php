@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
-use Validator;
+use Validator; 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
-
 use App\Role;
 
 class AuthController extends Controller
@@ -24,13 +23,25 @@ class AuthController extends Controller
     */
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
-
-    /**
-     * Where to redirect users after login / registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
+    
+    //protected $redirectTo = '/home';
+    
+    public function redirectPath()
+    {
+        // Logic that determines where to send the user
+        foreach (\Auth::user()->roles()->get() as $role)
+        {
+            if ($role->name == 'Admin'){
+                return '/admin';
+            }elseif ($role->name == 'Inspector') {
+                return '/inspections/';
+            }elseif ($role->name == 'Rapporteur') {
+                return '/reports/'; // yet to be done
+            }elseif ($role->name == 'Applicant') {
+                return '/applications/create';
+            }
+        }
+    }
 
     /**
      * Create a new authentication controller instance.

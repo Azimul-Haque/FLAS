@@ -10,6 +10,8 @@ use App\Application;
 use Validator, Input, Redirect, Session;
 use Auth;
 use Image;
+use PDF;
+Use NoCaptcha;
 
 class ApplicationController extends Controller
 {
@@ -37,7 +39,7 @@ class ApplicationController extends Controller
     {
         $applied = Application::where('created_by_id', '=' , Auth::user()->id)->first();
 
-        return view('applications.create')->withApplied($applied); ;
+        return view('applications.create')->withApplied($applied);
     }
 
     /**
@@ -71,7 +73,8 @@ class ApplicationController extends Controller
             'ownershipdocument'  => 'required|max:300',
             'tradelicense'       => 'required|max:300',
             'tinpaper'           => 'required|max:300',
-            'bankcertificate'    => 'required|max:300'
+            'bankcertificate'    => 'required|max:300',
+            'g-recaptcha-response' => 'required'
        ));
 
 
@@ -80,6 +83,16 @@ class ApplicationController extends Controller
 
         $application->created_by_id = Auth::user()->id;
         $application->application_status_id = 1;
+        //tracking number
+        $datetime_for_trackingNumber = date('dmyHis');
+        $characters = 'ABCDE01FGHIJ23KLMNO45PQRST67UVWXYZ89';
+        $unique = '';
+        $max = strlen($characters) - 1;
+        for ($i = 0; $i < 4; $i++) {
+            $unique .= $characters[mt_rand(0, $max)];
+        }
+        $application->tracking_number = $unique.$datetime_for_trackingNumber;
+        //tracking number
         $application->is_editable = 1;
         $application->company_name = $request->company_name;
         $application->email = $request->email;
@@ -98,6 +111,16 @@ class ApplicationController extends Controller
         $application->nearest_buildings = $request->nearest_buildings;
         $application->estd = $request->estd;
         $application->company_type = $request->company_type;
+        
+        // reCapcha Validation
+        // prevent validation error on captcha
+        /*NoCaptcha::shouldReceive('verifyResponse')
+            ->once()
+            ->andReturn(true);
+        // provide hidden input for your 'required' validation
+        NoCaptcha::shouldReceive('display')
+            ->zeroOrMoreTimes()
+            ->andReturn('<input type="hidden" name="g-recaptcha-response" value="1" />');*/
 
         // file upload
         if($request->hasFile('layoutplan')) {
@@ -167,7 +190,9 @@ class ApplicationController extends Controller
      */
     public function edit($id)
     {
-        $application = Application::find($id);
+        $application = Application::where('id', '=' , $id)
+                            ->where('created_by_id', '=' , Auth::user()->id)
+                            ->first(); 
         return view('applications.edit')
             ->withApplication($application);
     }
@@ -289,6 +314,17 @@ class ApplicationController extends Controller
 
         //redirect
         return redirect()->route('applications.show', $application->id);
+    }
+
+
+    //PDF License Generation
+    public function getPDF($id) {
+        $application = Application::where('id', '=' , $id)
+                            ->where('created_by_id', '=' , Auth::user()->id)
+                            ->first(); 
+        //$pdf = PDF::loadHTML('<h1>'.$application->id.'</h1>')->setPaper('a4', 'portrait')->setWarnings(false);
+        $pdf = PDF::loadView('pdf.index', compact('application'))->setPaper('a4', 'portrait')->setWarnings(false);
+        return $pdf->stream();
     }
 
     /**

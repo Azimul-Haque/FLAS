@@ -98,6 +98,9 @@ return [
         'applications_id' => [
             'unique' => 'This application has been inspected! To edit and resend E-Mail to the applicant please go to EDIT section',
         ],
+        'g-recaptcha-response' => [
+            'required' => 'অনুগ্রহ করে ক্যাপচাটিতে টিক চিহ্ন দিন।',
+        ],
     ],
 
     /*

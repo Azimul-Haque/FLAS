@@ -71,14 +71,16 @@
 			 		{!! Form::label('approval_message', 'Approval Message', ['style' => 'margin-top: 10px;']) !!}
 			 		{!! Form::textarea('approval_message', 'Your application has been accepted by the authority of BFSCD. Your license number is the following number.', array('class' => 'form-control', 'required' => '', 'rows' => '4')) !!}
 
-			 		{!! Form::label('license_number', 'License Number', ['class' => 'form-spacing-top']) !!}
-			 		{!! Form::text('license_number', null, array('class' => 'form-control', 'required' => '')) !!}
 
 			 		<div class="form-group form-spacing-top">
                         {!!Form::label('expiry_date', 'License Expires') !!}    
                         <div class="input-group date">
-                        <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
-                            {!!Form::text('expiry_date', null, ['class'=>'form-control']) !!}
+                        <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i>
+                        </span>
+                        <?php
+                        	$expiry_date_after_one_year = (date('Y')+1).date('-m-d h:i:s');
+                        ?>
+                            {!!Form::text('expiry_date', $expiry_date_after_one_year, ['class'=>'form-control']) !!}
                             
                         </div>    
                     </div> 

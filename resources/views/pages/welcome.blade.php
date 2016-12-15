@@ -1,7 +1,7 @@
 <html>
 <head>
   <meta charset="UTF-8" />
-  <title>Document</title>
+  <title>Fire License Automation System</title>
     {!!Html::style('css/styles.css')!!}
     {!!Html::style('css/font-awesome.min.css')!!}
     <script src="js/banglaCalender.js"></script>
@@ -20,19 +20,31 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
-      <div style="background: #bbdefb;">
-        <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
-        <a href="http://www.fireservice.gov.bd/">বাংলাদেশ জাতীয় তথ্য বাতায়ন</a>
+      <div class="" style="background: #bbdefb;">
+        <div class="">
+          <i class="fa fa-folder-open-o" aria-hidden="true"></i> 
+            <a href="http://www.fireservice.gov.bd/">বাংলাদেশ জাতীয় তথ্য বাতায়ন</a>
 
-        <span class="right">
-          <script type="text/javascript">
-            var todaydate=new Date();
-            todaydate.setTime(todaydate.getTime() +(todaydate.getTimezoneOffset()+360)*60*1000); 
-            var curmonth=todaydate.getMonth()+1; //get current month (1-12)
-            var curyear=todaydate.getFullYear(); //get current year
-            document.write(oneDay());
-          </script>
-        </span>
+            <span class="right">
+              <script type="text/javascript">
+                var todaydate=new Date();
+                todaydate.setTime(todaydate.getTime() +(todaydate.getTimezoneOffset()+360)*60*1000); 
+                var curmonth=todaydate.getMonth()+1; //get current month (1-12)
+                var curyear=todaydate.getFullYear(); //get current year
+                document.write(oneDay());
+              </script>
+            </span>
+            <div class="">
+              <center>
+                <table class="">
+                  <tr>
+                    <td><img class="img-responsive" style="width: 70px;" src="images/fslogo.png"></td>
+                    <td><a style="text-decoration: none; font-size: 40px;" href="/">ফায়ার লাইসেন্স অটোমেশন সিস্টেম</a></td>
+                  </tr>
+                </table> 
+              </center>
+            </div>
+        </div>
       </div>
            <div id="hero-wrapper">
             <div class="carousel-wrapper">
@@ -94,15 +106,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                   </button>
-                  <a class="navbar-brand" href="/">ফায়ার লাইসেন্স অটোমেশন সিস্টেম</a>
+                  <a class="navbar-brand" href="{{ url('/') }}"><i class="fa fa-home" aria-hidden="true"></i> নীড় পাতা</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling-->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   <ul class="nav navbar-nav">
-                    @if(Auth::check())
-                    <li class=""><a href="{{ url('/home') }}"><i class="fa fa-home" aria-hidden="true"></i> নীড় পাতা</a></li>
-                    @endif
                     @role('Admin')
                     <li class="dropdown">
                       <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cogs" aria-hidden="true"></i>  এডমিন <span class="caret"></span></a>
@@ -383,6 +392,9 @@
                   </li>
                   <li class="list-group-item">
                     <i class="fa fa-file-text" aria-hidden="true"></i> <a href="{{route('applications.create')}}">আবেদন হাল</a>
+                  </li>
+                  <li class="list-group-item">
+                    <i class="fa fa-globe" aria-hidden="true"></i> <a href="http://www.fireservice.gov.bd/">ফায়ার সার্ভিস ওয়েবসাইট</a>
                   </li>
                 </ul>
               </div>

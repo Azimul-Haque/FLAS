@@ -10,7 +10,14 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> --}}
 
   <style>
-	body { font-family: Kalpurush, sans-serif; }
+	body { font-family: DejaVu Sans;}
+  .container{
+    width: 100%;
+    height: 700px;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 4px;
+  }
   </style>
 </head>
 <body>

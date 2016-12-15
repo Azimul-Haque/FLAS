@@ -105,6 +105,13 @@
 				<hr>
 				<div class="row">
 					<div class="col-sm-12">
+						{!! Form::label('phase_1_message', 'Inspection Phase1 Message') !!}
+            			{!! Form::textarea('phase_1_message', null, array('class' => 'form-control', 'rows' => '4')) !!}
+					</div>
+				</div>
+				<br/>
+				<div class="row">
+					<div class="col-sm-12">
 
             			{{Form::button('<i class="fa fa-envelope" aria-hidden="true"></i> Notify Applicant', array('type' => 'submit', 'class' => 'btn btn-primary btn-block'))}}
 					</div>

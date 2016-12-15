@@ -25,6 +25,7 @@
 		</div>
 		@else
 		<div class="col-md-8">
+			<span>Your tracking number is: <big><b>{{$application->tracking_number }}</b></big>. Use it track the application status.</span>
 			<h1 class="">Application View</h1>
 			<table class="table">
 				<thead>

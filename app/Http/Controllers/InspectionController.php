@@ -10,7 +10,6 @@ use App\Application;
 use App\Inspection;
 use Mail;
 use Carbon\Carbon;
-use PDF;
 
 class InspectionController extends Controller
 {
@@ -18,11 +17,7 @@ class InspectionController extends Controller
         $this->middleware('auth');
         $this->middleware('role:Inspector');
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $applications = Application::orderBy('id','DESC')
@@ -86,46 +81,31 @@ class InspectionController extends Controller
         return view('inspections.tables.expired')
                 ->withApplications($applications);
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create($id)
+
+/*    public function create($id)
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $application = Application::find($id);
         return view('inspections.show')->withApplication($application);
-    }
+    }*/
 
+    // Inpection Phase 1 
     public function getInspect($id)
     {
         $application = Application::find($id);
         return view('inspections.inspect')->withApplication($application);
     }
     
-
+    // Inpection Phase 1 
     public function postInspect(Request $request)
     {
         //validation
@@ -151,7 +131,8 @@ class InspectionController extends Controller
             'check_estd'                 => 'sometimes',
             'initial_estd'               => 'sometimes|max:255',
             'check_image'                => 'sometimes',
-            'initial_image'              => 'sometimes|max:255'
+            'initial_image'              => 'sometimes|max:255',
+            'phase_1_message'            => 'sometimes'
        ));
 
 
@@ -190,6 +171,8 @@ class InspectionController extends Controller
         $inspection->check_image = $request->check_image;
         $inspection->initial_image = $request->initial_image;
 
+        $inspection->phase_1_message = $request->phase_1_message;
+
 
         $inspection->save();
 
@@ -204,7 +187,57 @@ class InspectionController extends Controller
             'email' => $request->email,
             'from' => 'flasbfscd@gmail.com',
             'subject' => 'FLAS Application Inspection Report',
-            'bodyMessage' => $request->initial_company_name
+            'bodyMessage' => $request->phase_1_message
+            );
+        Mail::send('emails.inspect', $data, function($message) use ($data){
+            $message->from($data['from']);
+            $message->to('orbachinujbuk@gmail.com');
+            $message->subject($data['subject']);
+        });
+
+        Session::flash('success', 'The applicant has been sent a notification via email.');
+
+        //redirect
+        return redirect()->route('inspections.response', $application->id);
+    }
+
+    // Response for all operations
+    public function getResponse($id){
+        $application = Application::find($id);
+        return view('inspections.response')->withApplication($application);
+    }
+
+    // Inpection Phase 2
+    public function getPhase2($id)
+    {
+        $application = Application::find($id);
+        return view('inspections.phase2')->withApplication($application);
+    }
+    
+    // Inpection Phase 2
+    public function postPhase2(Request $request, $id)
+    {
+        $application = Application::find($id);
+        //validation
+        $this->validate($request, array(
+            'email'                      => 'required|email',
+            'phase_2_message'           => 'required'
+        ));
+
+       // Turn Application Status INSPECTED to REJECTED PHASE 2
+        $application->application_status_id = 2;
+        $application->is_editable = 0;
+        $application->save();
+
+        $inspection = Inspection::firstOrCreate(['application_id' => $application->id]);
+        $inspection->phase_2_message = $request->phase_2_message;
+        $inspection->save();
+
+        $data = array(
+            'email' => $request->email,
+            'from' => 'flasbfscd@gmail.com',
+            'subject' => 'FLAS Application Inspection Report',
+            'bodyMessage' => $request->phase_2_message
             );
         Mail::send('emails.inspect', $data, function($message) use ($data){
             $message->from($data['from']);
@@ -219,32 +252,7 @@ class InspectionController extends Controller
     }
 
 
-    public function getResponse($id){
-        $application = Application::find($id);
-        return view('inspections.response')->withApplication($application);
-    }
-
-
-    public function getPhase2($id)
-    {
-        $application = Application::find($id);
-        return view('inspections.phase2')->withApplication($application);
-    }
-    
-    public function postPhase2(Request $request, $id)
-    {
-        
-    }
-
-
-
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // Inpection Phase 1 Update (Inpect Again)
     public function edit($id)
     {
         $application = Application::find($id);
@@ -254,13 +262,8 @@ class InspectionController extends Controller
             ->withInspection($inspection); 
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
+    // Inpection Phase 1 Update (Inpect Again)
     public function update(Request $request, $id)
     {
         $inspection = Inspection::find($id);
@@ -286,11 +289,9 @@ class InspectionController extends Controller
             'check_estd'                 => 'sometimes',
             'initial_estd'               => 'sometimes|max:255',
             'check_image'                => 'sometimes',
-            'initial_image'              => 'sometimes|max:255'
+            'initial_image'              => 'sometimes|max:255',
+            'phase_1_message'              => 'sometimes'
        ));
-
-
-
 
         //store to DB
 
@@ -324,6 +325,8 @@ class InspectionController extends Controller
         $inspection->check_image = $request->check_image;
         $inspection->initial_image = $request->initial_image;
 
+        $inspection->phase_1_message = $request->phase_1_message;
+
 
         $inspection->save();
 
@@ -337,7 +340,7 @@ class InspectionController extends Controller
             'email' => $request->email,
             'from' => 'flasbfscd@gmail.com',
             'subject' => 'FLAS Application Inspection Report',
-            'bodyMessage' => $request->initial_company_name
+            'bodyMessage' => $request->phase_1_message
             );
         Mail::send('emails.inspect', $data, function($message) use ($data){
             $message->from($data['from']);
@@ -365,7 +368,6 @@ class InspectionController extends Controller
         $this->validate($request, array(
             'email'                      => 'required|email',
             'approval_message'           => 'required',
-            'license_number'             => 'required|max:255',
             'expiry_date'                => 'required|max:255'
        ));
 
@@ -398,7 +400,8 @@ class InspectionController extends Controller
             'subject' => 'FLAS Application Inspection Report',
             'approval_message' => $request->approval_message,
             'license_number' => $year.$application->company_type.$unique.$expiry_date_date_for_license,
-            'expiry_date' => $request->expiry_date
+            'expiry_date' => $request->expiry_date,
+            'id' => $id
             );
         Mail::send('emails.approve', $data, function($message) use ($data){
             $message->from($data['from']);
@@ -410,14 +413,6 @@ class InspectionController extends Controller
 
         //redirect
         return redirect()->route('inspections.response', $application->id);
-    }
-
-    //PDF TESTING
-    public function getPDF($id) {
-        $application = Application::find($id);
-        //$pdf = PDF::loadHTML('<h1>'.$application->id.'</h1>')->setPaper('a4', 'portrait')->setWarnings(false);
-        $pdf = PDF::loadView('pdf.index', compact('application'))->setPaper('a4', 'portrait')->setWarnings(false);
-        return $pdf->stream();
     }
 
     public function getReject($id) {
@@ -433,7 +428,7 @@ class InspectionController extends Controller
             'rejection_message'           => 'required'
        ));
 
-       // Turn Application Status INSPECTED to APPROVED
+       // Turn Application Status INSPECTED to REJECTED
         $application->application_status_id = 4;
         $application->is_editable = 0;
         $application->save();
@@ -458,14 +453,9 @@ class InspectionController extends Controller
         return redirect()->route('inspections.response', $application->id);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+
+/*    public function destroy($id)
     {
         //
-    }
+    }*/
 }

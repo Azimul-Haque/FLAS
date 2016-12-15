@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Role;
-use DB;
+use DB; 
 use Hash;
 
 class AdminController extends Controller
