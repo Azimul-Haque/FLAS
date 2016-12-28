@@ -31,8 +31,15 @@
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
 			@if(!empty($applied))
-			<h3>You have already applied! ({{ $applied->application_status->display_name }})</h3>
-			<a href="{{ url('applications/'.$applied->id) }}" class="btn btn-success">See Application</a>
+			<h3>You have already applied! ({{ $applied->application_status->display_name }})<br/>
+			আপনি ইতোমধ্যে আবেদন করেছেন!
+
+			</h3>
+			<a href="{{ url('applications/'.$applied->id) }}" class="btn btn-success"><i class="fa fa-address-book-o" aria-hidden="true"></i> See Application (দেখুন)</a>
+
+			@if($applied->application_status->display_name === 'Approved')
+			<a href="{{ url('license/pdf/'.$applied->id) }}" class="btn btn-info"><i class="fa fa-download" aria-hidden="true"></i> লাইসেন্স ডাউনলোড করুন</a>
+			@endif
 
 			@else
 			<h1>Apply for License (আবেদন করুন)</h1>
@@ -44,51 +51,51 @@
 			  <div class="panel-body">
 				  <div class="row">
 					<div class="col-md-6">
-				 		{!! Form::label('company_name', 'Name of the Company:') !!}
+				 		{!! Form::label('company_name', 'প্রতিষ্ঠানের নাম/ Name of the Company:') !!}
 				 		{!! Form::text('company_name', null, array('class' => 'form-control', 'required' => '')) !!}
 				 	</div>
 				 	<div class="col-md-6">
-				 		{!! Form::label('email', 'Email:', array('class' => '')) !!}
+				 		{!! Form::label('email', 'ইমেইল/ Email:', array('class' => '')) !!}
 				 		{!! Form::email('email', null, array('class' => 'form-control', 'required' => '')) !!}	
 				 	</div>
 					</div>
 					<br/>
 					<div class="row">
 						<div class="col-md-6">
-					 		{!! Form::label('phone', 'Phone:', array('class' => '')) !!}
+					 		{!! Form::label('phone', 'ফোন নাম্বার/ Phone:', array('class' => '')) !!}
 					 		{!! Form::text('phone', null, array('class' => 'form-control', 'required' => '')) !!}
 					 	</div>
 					 	<div class="col-md-6">
-					 		{!! Form::label('owner', 'Name of the Owner:', array('class' => '')) !!}
+					 		{!! Form::label('owner', 'স্বত্বাধিকারী/ Name of the Owner:', array('class' => '')) !!}
 					 		{!! Form::text('owner', null, array('class' => 'form-control', 'required' => '')) !!}
 					 	</div>
 					</div>
 					<br/>
 					<div class="row">
 						<div class="col-md-6">
-					 		{!! Form::label('chairman', 'Name of the Chairman:', array('class' => '')) !!}
+					 		{!! Form::label('chairman', 'চেয়ারম্যান/ Name of the Chairman:', array('class' => '')) !!}
 					 		{!! Form::text('chairman', null, array('class' => 'form-control', 'required' => '')) !!}
 					 	</div>
 					 	<div class="col-md-6">
-					 		{!! Form::label('ceo', 'Name of the CEO:', array('class' => '')) !!}
+					 		{!! Form::label('ceo', 'প্রধান নির্বাহী কর্মকর্তা/ Name of the CEO:', array('class' => '')) !!}
 					 		{!! Form::text('ceo', null, array('class' => 'form-control', 'required' => '')) !!}
 					 	</div>
 					</div>
 					<br/>
 					<div class="row">
 						<div class="col-md-6">
-					 		{!! Form::label('address', 'Company Address:', array('class' => '')) !!}
+					 		{!! Form::label('address', 'ঠিকানা/ Company Address:', array('class' => '')) !!}
 					 		{!! Form::text('address', null, array('class' => 'form-control', 'required' => '')) !!}
 					 	</div>
 					 	<div class="col-md-6">
-					 		{!! Form::label('estd', 'Established:') !!}
+					 		{!! Form::label('estd', 'প্রতিষ্ঠার সাল/ Established:') !!}
 					 		{!! Form::text('estd', null, array('class' => 'form-control', 'required' => '')) !!}
 					 	</div>
 					</div>
 					<br/>
 					<div class="row">
 						<div class="col-md-6">
-					 		{!! Form::label('company_type', 'Company Type:', array('class' => '')) !!}
+					 		{!! Form::label('company_type', 'প্রতিষ্ঠানের ধরণ/ Company Type:', array('class' => '')) !!}
 					 		{{ Form::select('company_type', [
 							   '' => 'Select Company Type',
 							   '0001' => 'Garments',
@@ -125,44 +132,44 @@
 			  <div class="panel-body">
 			  	<div class="row">
 				 	<div class="col-md-6">
-				 		{!! Form::label('employees', 'Total Employees:', array('class' => '')) !!}
+				 		{!! Form::label('employees', 'শ্রমিক সংখ্যা/ Total Employees:', array('class' => '')) !!}
 				 		{!! Form::text('employees', null, array('class' => 'form-control', 'required' => '')) !!}
 				 	</div>
 				 	<div class="col-md-6">
-				 		{!! Form::label('area', 'Total Area (Sq. Foot):', array('class' => '')) !!}
+				 		{!! Form::label('area', 'আয়তন/ Total Area (Sq. Foot):', array('class' => '')) !!}
 				 		{!! Form::text('area', null, array('class' => 'form-control', 'required' => '')) !!}
 				 	</div>
 				</div>
 				<br/>
 				<div class="row">
 					<div class="col-md-6">
-				 		{!! Form::label('fire_extinguisher', 'Total Fire Extinguisher:', array('class' => '')) !!}
+				 		{!! Form::label('fire_extinguisher', 'অগ্নি নির্বাপক সংখ্যা/ Total Fire Extinguisher:', array('class' => '')) !!}
 				 		{!! Form::text('fire_extinguisher', null, array('class' => 'form-control', 'required' => '')) !!}
 				 	</div>
 				 	<div class="col-md-6">
-				 		{!! Form::label('fire_extinguisher_exp_date', 'Expiray Date (Fire Extinguisher):', array('class' => '')) !!}
+				 		{!! Form::label('fire_extinguisher_exp_date', 'অগ্নি নির্বাপকের মেয়াদ Expiray Date (Fire Extinguisher):', array('class' => '')) !!}
 				 		{!! Form::text('fire_extinguisher_exp_date', null, array('class' => 'form-control', 'required' => '')) !!}
 				 	</div>
 				</div>
 				<br/>
 				<div class="row">
 					<div class="col-md-6">
-				 		{!! Form::label('rod_breaker', 'Total Rod Breaker:', array('class' => '')) !!}
+				 		{!! Form::label('rod_breaker', 'মোট রড ব্রেকার/ Total Rod Breaker:', array('class' => '')) !!}
 				 		{!! Form::text('rod_breaker', null, array('class' => 'form-control', 'required' => '')) !!}
 				 	</div>
 				 	<div class="col-md-6">
-				 		{!! Form::label('emergency_exit', 'Total Emergency Exits:', array('class' => '')) !!}
+				 		{!! Form::label('emergency_exit', 'জরুরী নির্গমন পথ/ Total Emergency Exits:', array('class' => '')) !!}
 				 		{!! Form::text('emergency_exit', null, array('class' => 'form-control', 'required' => '')) !!}
 				 	</div>
 				</div>
 				<br/>
 				<div class="row">
 					<div class="col-md-6">
-				 		{!! Form::label('storey', 'Total Storeys:', array('class' => '')) !!}
+				 		{!! Form::label('storey', 'মোট তলা/ Total Storeys:', array('class' => '')) !!}
 				 		{!! Form::text('storey', null, array('class' => 'form-control', 'required' => '')) !!}
 				 	</div>
 				 	<div class="col-md-6">
-				 		{!! Form::label('nearest_buildings', 'Buildings Within 50 Feet:', array('class' => '')) !!}
+				 		{!! Form::label('nearest_buildings', 'নিকটতম দালান সংখ্যা/ Buildings Within 50 Feet:', array('class' => '')) !!}
 				 		{!! Form::text('nearest_buildings', null, array('class' => 'form-control', 'required' => '')) !!}
 				 	</div>
 				</div>
@@ -174,29 +181,29 @@
 			  <div class="panel-body">
 			  	<div class="row">
 				 	<div class="col-md-6">
-				 		{!! Form::label('layoutplan', 'Industrial Lay-out Plan', ['class' => '']) !!}
+				 		{!! Form::label('layoutplan', 'প্রতিষ্ঠানের লে-আউট প্ল্যান/ Industrial Lay-out Plan', ['class' => '']) !!}
 						{!! Form::file('layoutplan', ['data-parsley-filemaxmegabytes' => '0.3', 'data-parsley-trigger' => 'change', 'data-parsley-filemimetypes' => 'application/pdf, image/jpeg, image/png', 'class'=> '', 'required' => '']) !!}
 				 	</div>
 				 	<div class="col-md-6">
-				 		{!! Form::label('ownershipdocument', 'Ownership Documents/ House rent Agreement', ['class' => '']) !!}
+				 		{!! Form::label('ownershipdocument', 'স্বত্বাধিকার সংক্রান্ত ডকুমেন্ট/ Ownership Documents/ House rent Agreement', ['class' => '']) !!}
 						{!! Form::file('ownershipdocument', ['data-parsley-filemaxmegabytes' => '0.3', 'data-parsley-trigger' => 'change', 'data-parsley-filemimetypes' => 'application/pdf, image/jpeg, image/png', 'class'=> '', 'required' => '']) !!}
 				 	</div>
 				</div>
 				<hr>
 			  	<div class="row">
 				 	<div class="col-md-6">
-				 		{!! Form::label('tradelicense', 'Trade License', ['class' => '']) !!}
+				 		{!! Form::label('tradelicense', 'ট্রেড লাইসেন্স/ Trade License', ['class' => '']) !!}
 						{!! Form::file('tradelicense', ['data-parsley-filemaxmegabytes' => '0.3', 'data-parsley-trigger' => 'change', 'data-parsley-filemimetypes' => 'application/pdf, image/jpeg, image/png', 'class'=> '', 'required' => '']) !!}
 				 	</div>
 				 	<div class="col-md-6">
-				 		{!! Form::label('tinpaper', 'TIN Certificate', ['class' => '']) !!}
+				 		{!! Form::label('tinpaper', 'আয়কর সার্টিফিকেট/ TIN Certificate', ['class' => '']) !!}
 						{!! Form::file('tinpaper', ['data-parsley-filemaxmegabytes' => '0.3', 'data-parsley-trigger' => 'change', 'data-parsley-filemimetypes' => 'application/pdf, image/jpeg, image/png', 'class'=> '', 'required' => '']) !!}
 				 	</div>
 				</div>
 				<hr>
 				<div class="row">
 				 	<div class="col-md-6">
-				 		{!! Form::label('bankcertificate', 'Bank Certificate', ['class' => '']) !!}
+				 		{!! Form::label('bankcertificate', 'ব্যাংক সার্টিফিকেট/ Bank Certificate', ['class' => '']) !!}
 						{!! Form::file('bankcertificate', ['data-parsley-filemaxmegabytes' => '0.3', 'data-parsley-trigger' => 'change', 'data-parsley-filemimetypes' => 'application/pdf, image/jpeg, image/png', 'class'=> '', 'required' => '']) !!}
 				 	</div>
 				</div> 

@@ -9,6 +9,7 @@ use Validator, Input, Redirect, Session;
 use App\Application;
 use App\User;
 use Mail;
+use NoCaptcha;
 
 class PagesController extends Controller
 {
@@ -29,7 +30,7 @@ class PagesController extends Controller
             'email'       => 'required|email',
             'subject'     => 'required|min:5' ,
             'message'     => 'required|min:5'       
-       ));
+        ));
 
        $data = ['email'   => $request->email,
                 'subject'   => $request->subject,
@@ -55,4 +56,22 @@ class PagesController extends Controller
         //redirect
         return view('pages.contact');
 	}
+
+    public function getApplicationStatusSearchPage() {
+        return view('pages.applicationstatussearch');
+    }
+
+    public function getApplicationStatus(Request $request) {
+        $this->validate($request, array(
+            'tracking_number'       => 'required|max:255',
+            'g-recaptcha-response'  => 'required'   
+        ));
+
+        $applicationstatus = Application::where('tracking_number', '=' , $request->tracking_number)
+                            ->first(); 
+
+        return view('pages.applicationstatussearch')
+                    ->withApplicationstatus($applicationstatus); 
+    }
+    
 }

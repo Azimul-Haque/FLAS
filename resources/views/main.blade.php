@@ -45,17 +45,17 @@
           <ul class="nav navbar-nav">
             @role('Admin')
             <li class="dropdown">
-              <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cogs" aria-hidden="true"></i>  Admin <span class="caret"></span></a>
+              <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cogs" aria-hidden="true"></i>  এডমিন <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="{{ url('/admin') }}"><i class="fa fa-users" aria-hidden="true"></i> Manage Users</a></li>
+                <li><a href="{{ url('/admin') }}"><i class="fa fa-users" aria-hidden="true"></i> ইউজার ম্যানেজমেন্ট</a></li>
                 <li role="separator" class="divider"></li>
-                <li><a href="{{ url('/roles') }}"><i class="fa fa-wrench" aria-hidden="true"></i> Manage Roles</a></li>
+                <li><a href="{{ url('/roles') }}"><i class="fa fa-wrench" aria-hidden="true"></i> রোল ম্যানেজমেন্ট</a></li>
               </ul>
             </li>
             @endrole
             @role('Inspector')
             <li class="dropdown">
-              <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-list-ol" aria-hidden="true"></i> Inspect Applications <span class="caret"></span></a>
+              <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-list-ol" aria-hidden="true"></i> আবেদন নিরীক্ষণ <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li class=""><a href="{{ route('inspections.pending') }}"><i class="fa fa-hourglass-start" aria-hidden="true"></i> Pending Applications</a></li>
                 <li role="separator" class="divider"></li>
@@ -70,13 +70,20 @@
             </li>
             @endrole
             @role('Applicant')
-            <li class=""><a href="{{route('applications.create')}}"><i class="fa fa-address-card" aria-hidden="true"></i> Application</a></li>
+            <li class=""><a href="{{route('applications.create')}}"><i class="fa fa-address-card" aria-hidden="true"></i> আবেদন</a></li>
             @endrole
             @role('Rapporteur')
-            <li class=""><a href="{{ url('reports/') }}"><i class="fa fa-bar-chart" aria-hidden="true"></i> Generate Report</a></li>
+            <li class="dropdown">
+              <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-file-text" aria-hidden="true"></i> রিপোর্ট <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="{{ url('/reports') }}"><i class="fa fa-bar-chart" aria-hidden="true"></i> রিপোর্ট তৈরি করুন</a></li>
+                <li><a href="{{ url('/reports/androidapp/') }}"><i class="fa fa-mobile" aria-hidden="true"></i> Fire Emergency App</a></li>
+              </ul>
+            </li>
             @endrole
-            <li><a href="{{ url('/about') }}"><i class="fa fa-address-book-o" aria-hidden="true"></i> About</a></li>
-            <li><a href="{{ url('/contact') }}"><i class="fa fa-envelope-o" aria-hidden="true"></i> Contact</a></li>
+            <li><a href="{{ url('/about') }}"><i class="fa fa-address-book-o" aria-hidden="true"></i> আমাদের সম্পর্কে</a></li>
+            <li><a href="{{ url('/contact') }}"><i class="fa fa-envelope-o" aria-hidden="true"></i> যোগাযোগ</a></li>
+            <li><a href="{{ url('/applicationstatus/search') }}"><i class="fa fa-search" aria-hidden="true"></i> আবেদনের হাল খুঁজুন</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
 
@@ -89,10 +96,10 @@
             </li>
             @else
             <li class="dropdown">
-              <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle" aria-hidden="true"></i> User Account <span class="caret"></span></a>
+              <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle" aria-hidden="true"></i> একাউন্ট <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="{{ route('login') }}" class=""><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
-                <li><a href="{{ route('register') }}" class=""><i class="fa fa-user-plus" aria-hidden="true"></i> Register</a></li>
+                <li><a href="{{ route('login') }}" class=""><i class="fa fa-sign-in" aria-hidden="true"></i> লগইন</a></li>
+                <li><a href="{{ route('register') }}" class=""><i class="fa fa-user-plus" aria-hidden="true"></i> রেজিস্টার</a></li>
               </ul>
             </li>
             @endif
@@ -112,7 +119,7 @@
                   <div class="panel panel-default">
                     <div class="panel-heading vertical-menu-panel vertical-menu-panel">
                       <h4 class="panel-title">
-                        <a class="vertical-menu-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse1"><i class="fa fa-cogs" aria-hidden="true"></i>  Admin <span class="caret"></span></a> 
+                        <a class="vertical-menu-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse1"><i class="fa fa-cogs" aria-hidden="true"></i>  এডমিন <span class="caret"></span></a> 
                       </h4>
                     </div>
                     <div id="collapse1" class="panel-collapse collapse
@@ -122,10 +129,10 @@
                     ">
                       <ul class="list-group">
                         <li class="list-group-item">
-                          <a href="{{ url('/admin') }}"><i class="fa fa-users" aria-hidden="true"></i> Manage Users</a>
+                          <a href="{{ url('/admin') }}"><i class="fa fa-users" aria-hidden="true"></i> ইউজার ম্যানেজমেন্ট</a>
                         </li>
                         <li class="list-group-item">
-                          <a href="{{ url('/roles') }}"><i class="fa fa-wrench" aria-hidden="true"></i> Manage Roles</a>
+                          <a href="{{ url('/roles') }}"><i class="fa fa-wrench" aria-hidden="true"></i> রোল ম্যানেজমেন্ট</a>
                         </li>
                       </ul>
                     </div>
@@ -135,7 +142,7 @@
                   <div class="panel panel-default ">
                     <div class="panel-heading vertical-menu-panel">
                       <h4 class="panel-title">
-                        <a class="vertical-menu-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse2"><i class="fa fa-list-ol" aria-hidden="true"></i> Inspection <span class="caret"></span></a>
+                        <a class="vertical-menu-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse2"><i class="fa fa-list-ol" aria-hidden="true"></i> আবেদন নিরীক্ষণ <span class="caret"></span></a>
                       </h4>
                     </div>
                     <div id="collapse2" class="panel-collapse collapse
@@ -167,7 +174,7 @@
                   <div class="panel panel-default ">
                     <div class="panel-heading vertical-menu-panel">
                       <h4 class="panel-title">
-                        <a class="vertical-menu-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse3"><i class="fa fa-address-card" aria-hidden="true"></i> Application <span class="caret"></span></a>
+                        <a class="vertical-menu-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse3"><i class="fa fa-address-card" aria-hidden="true"></i> আবেদন <span class="caret"></span></a>
                       </h4>
                     </div>
                     <div id="collapse3" class="panel-collapse collapse
@@ -177,7 +184,7 @@
                     ">
                       <ul class="list-group">
                         <li class="list-group-item">
-                          <a href="{{route('applications.create')}}"><i class="fa fa-file-word-o" aria-hidden="true"></i> Application</a>
+                          <a href="{{route('applications.create')}}"><i class="fa fa-file-word-o" aria-hidden="true"></i> আবেদন করুন</a>
                         </li>
                       </ul>
                     </div>
@@ -187,7 +194,7 @@
                   <div class="panel panel-default ">
                     <div class="panel-heading vertical-menu-panel">
                       <h4 class="panel-title">
-                        <a class="vertical-menu-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse4"><i class="fa fa-file-text" aria-hidden="true"></i> Report <span class="caret"></span></a>
+                        <a class="vertical-menu-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse4"><i class="fa fa-file-text" aria-hidden="true"></i> রিপোর্ট <span class="caret"></span></a>
                       </h4>
                     </div>
                     <div id="collapse4" class="panel-collapse collapse
@@ -197,7 +204,10 @@
                     ">
                       <ul class="list-group">
                         <li class="list-group-item">
-                          <a href="{{ url('reports/') }}"><i class="fa fa-bar-chart" aria-hidden="true"></i> Generate Report</a>
+                          <a href="{{ url('/reports') }}"><i class="fa fa-bar-chart" aria-hidden="true"></i> রিপোর্ট তৈরি করুন</a>
+                        </li>
+                        <li class="list-group-item">
+                          <a href="{{ url('/reports/androidapp') }}"><i class="fa fa-mobile" aria-hidden="true"></i> Fire Emergency App</a>
                         </li>
                       </ul>
                     </div>

@@ -25,11 +25,11 @@
 			    <h3>Export <b>Pending</b> Applications (এক্সপোর্ট করুন)</h3>
 				<span style="font-size: 15px">
 					<i class="fa fa-file-excel-o" aria-hidden="true" style="font-size: 20px; color: green;"></i>
-					<a href="{{ url('/reports/export/pending/excel') }}"> এক্সসেল ফরম্যাট(.xlsx)</a>
+					<a href="{{ url('/reports/export/pending/excel') }}"> এক্সসেল ফরম্যাট(.xlsx) <i class="fa fa-download" aria-hidden="true"></i></a>
 				</span>
 				<span style="margin-left: 20px; font-size: 15px">
 					<i class="fa fa-file-pdf-o" aria-hidden="true" style="font-size: 20px; color: red;"></i>
-					<a href="{{ url('/reports/export/pending/pdf') }}"> পিডিএফ ফরম্যাট(.pdf)</a>
+					<a href="{{ url('/reports/export/pending/pdf') }}"> পিডিএফ ফরম্যাট(.pdf) <i class="fa fa-download" aria-hidden="true"></i></a>
 				</span>
 				<hr/>
 			    <h3>Pending</h3>
@@ -54,11 +54,11 @@
 			    <h3>Export <b>Inspected</b> Applications (এক্সপোর্ট করুন)</h3>
 				<span style="font-size: 15px">
 					<i class="fa fa-file-excel-o" aria-hidden="true" style="font-size: 20px; color: green;"></i>
-					<a href="{{ url('/reports/export/inspected/excel') }}"> এক্সসেল ফরম্যাট(.xlsx)</a>
+					<a href="{{ url('/reports/export/inspected/excel') }}"> এক্সসেল ফরম্যাট(.xlsx) <i class="fa fa-download" aria-hidden="true"></i></a>
 				</span>
 				<span style="margin-left: 20px; font-size: 15px">
 					<i class="fa fa-file-pdf-o" aria-hidden="true" style="font-size: 20px; color: red;"></i>
-					<a href="{{ url('/reports/export/inspected/pdf') }}"> পিডিএফ ফরম্যাট(.pdf)</a>
+					<a href="{{ url('/reports/export/inspected/pdf') }}"> পিডিএফ ফরম্যাট(.pdf) <i class="fa fa-download" aria-hidden="true"></i></a>
 				</span>
 				<hr/>
 			    <h3>Inspected</h3>
@@ -83,11 +83,11 @@
 			    <h3>Export <b>Approved</b> Applications (এক্সপোর্ট করুন)</h3>
 				<span style="font-size: 15px">
 					<i class="fa fa-file-excel-o" aria-hidden="true" style="font-size: 20px; color: green;"></i>
-					<a href="{{ url('/reports/export/approved/excel') }}"> এক্সসেল ফরম্যাট(.xlsx)</a>
+					<a href="{{ url('/reports/export/approved/excel') }}"> এক্সসেল ফরম্যাট(.xlsx) <i class="fa fa-download" aria-hidden="true"></i></a>
 				</span>
 				<span style="margin-left: 20px; font-size: 15px">
 					<i class="fa fa-file-pdf-o" aria-hidden="true" style="font-size: 20px; color: red;"></i>
-					<a href="{{ url('/reports/export/approved/pdf') }}"> পিডিএফ ফরম্যাট(.pdf)</a>
+					<a href="{{ url('/reports/export/approved/pdf') }}"> পিডিএফ ফরম্যাট(.pdf) <i class="fa fa-download" aria-hidden="true"></i></a>
 				</span>
 				<hr/>
 			    <h3>Approved</h3>
@@ -112,11 +112,11 @@
 			    <h3>Export <b>Rejected</b> Applications (এক্সপোর্ট করুন)</h3>
 				<span style="font-size: 15px">
 					<i class="fa fa-file-excel-o" aria-hidden="true" style="font-size: 20px; color: green;"></i>
-					<a href="{{ url('/reports/export/rejected/excel') }}"> এক্সসেল ফরম্যাট(.xlsx)</a>
+					<a href="{{ url('/reports/export/rejected/excel') }}"> এক্সসেল ফরম্যাট(.xlsx) <i class="fa fa-download" aria-hidden="true"></i></a>
 				</span>
 				<span style="margin-left: 20px; font-size: 15px">
 					<i class="fa fa-file-pdf-o" aria-hidden="true" style="font-size: 20px; color: red;"></i>
-					<a href="{{ url('/reports/export/rejected/pdf') }}"> পিডিএফ ফরম্যাট(.pdf)</a>
+					<a href="{{ url('/reports/export/rejected/pdf') }}"> পিডিএফ ফরম্যাট(.pdf) <i class="fa fa-download" aria-hidden="true"></i></a>
 				</span>
 				<hr/>
 			    <h3>Rejected</h3>
@@ -141,11 +141,11 @@
 			    <h3>Export <b>Expired</b> Applications (এক্সপোর্ট করুন)</h3>
 				<span style="font-size: 15px">
 					<i class="fa fa-file-excel-o" aria-hidden="true" style="font-size: 20px; color: green;"></i>
-					<a href="{{ url('/reports/export/expired/excel') }}"> এক্সসেল ফরম্যাট(.xlsx)</a>
+					<a href="{{ url('/reports/export/expired/excel') }}"> এক্সসেল ফরম্যাট(.xlsx) <i class="fa fa-download" aria-hidden="true"></i></a>
 				</span>
 				<span style="margin-left: 20px; font-size: 15px">
 					<i class="fa fa-file-pdf-o" aria-hidden="true" style="font-size: 20px; color: red;"></i>
-					<a href="{{ url('/reports/export/expired/pdf') }}"> পিডিএফ ফরম্যাট(.pdf)</a>
+					<a href="{{ url('/reports/export/expired/pdf') }}"> পিডিএফ ফরম্যাট(.pdf) <i class="fa fa-download" aria-hidden="true"></i></a>
 				</span>
 				<hr/>
 			    <h3>Expired</h3>

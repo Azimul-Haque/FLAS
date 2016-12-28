@@ -50,8 +50,11 @@ class InspectionController extends Controller
 
     public function getApproved()
     {
+        $today = Carbon::today();
+        $startday = '1971-16-12';
         $applications = Application::orderBy('id','DESC')
                         ->where('application_status_id', '=', 3)
+                        ->whereDate('expiry_date', '>', date('Y-m-d'))
                         ->paginate(5);
 
         return view('inspections.tables.approved')
@@ -71,9 +74,9 @@ class InspectionController extends Controller
     public function getExpired()
     {
         $today = Carbon::today();
-        $startday = '1971-16-12 12:00:00';
+        $startday = '1971-16-12';
         $applications = Application::orderBy('id','DESC')
-                        ->whereDate('expiry_date','<', $today)
+                        ->whereDate('expiry_date', '<=', date('Y-m-d'))
                         ->whereDate('expiry_date','>', $startday)
                         ->where('application_status_id', '=', 3)
                         ->paginate(5);
@@ -130,8 +133,31 @@ class InspectionController extends Controller
             'initial_employees'          => 'sometimes|max:255',
             'check_estd'                 => 'sometimes',
             'initial_estd'               => 'sometimes|max:255',
-            'check_image'                => 'sometimes',
-            'initial_image'              => 'sometimes|max:255',
+
+            'check_area'                 => 'sometimes',
+            'initial_area'               => 'sometimes|max:255',
+            'check_fire_extinguisher'    => 'sometimes',
+            'initial_fire_extinguisher'  => 'sometimes|max:255',
+            'check_fire_extinguisher_exp_date'                 => 'sometimes',
+            'initial_fire_extinguisher_exp_date'               => 'sometimes|max:255',
+            'check_rod_breaker'          => 'sometimes',
+            'initial_rod_breaker'        => 'sometimes|max:255',
+            'check_emergency_exit'          => 'sometimes',
+            'initial_emergency_exit'        => 'sometimes|max:255',
+            'check_storey'          => 'sometimes',
+            'initial_storey'        => 'sometimes|max:255',
+            'check_nearest_buildings'          => 'sometimes',
+            'initial_nearest_buildings'        => 'sometimes|max:255',
+            'check_layoutplan'          => 'sometimes',
+            'initial_layoutplan'        => 'sometimes|max:255',
+            'check_ownershipdocument'          => 'sometimes',
+            'initial_ownershipdocument'        => 'sometimes|max:255',
+            'check_tradelicense'          => 'sometimes',
+            'initial_tradelicense'        => 'sometimes|max:255',
+            'check_tinpaper'          => 'sometimes',
+            'initial_tinpaper'        => 'sometimes|max:255',
+            'check_bankcertificate'          => 'sometimes',
+            'initial_bankcertificate'        => 'sometimes|max:255',
             'phase_1_message'            => 'sometimes'
        ));
 
@@ -167,9 +193,42 @@ class InspectionController extends Controller
         
         $inspection->check_estd = $request->check_estd;
         $inspection->initial_estd = $request->initial_estd;
-        
-        $inspection->check_image = $request->check_image;
-        $inspection->initial_image = $request->initial_image;
+
+        $inspection->check_area = $request->check_area;
+        $inspection->initial_area = $request->initial_area;
+
+        $inspection->check_fire_extinguisher = $request->check_fire_extinguisher;
+        $inspection->initial_fire_extinguisher = $request->initial_fire_extinguisher;
+
+        $inspection->check_fire_extinguisher_exp_date = $request->check_fire_extinguisher_exp_date;
+        $inspection->initial_fire_extinguisher_exp_date = $request->initial_fire_extinguisher_exp_date;
+
+        $inspection->check_rod_breaker = $request->check_rod_breaker;
+        $inspection->initial_rod_breaker = $request->initial_rod_breaker;
+
+        $inspection->check_emergency_exit = $request->check_emergency_exit;
+        $inspection->initial_emergency_exit = $request->initial_emergency_exit;
+
+        $inspection->check_storey = $request->check_storey;
+        $inspection->initial_storey = $request->initial_storey;
+
+        $inspection->check_nearest_buildings = $request->check_nearest_buildings;
+        $inspection->initial_nearest_buildings = $request->initial_nearest_buildings;
+
+        $inspection->check_layoutplan = $request->check_layoutplan;
+        $inspection->initial_layoutplan = $request->initial_layoutplan; 
+
+        $inspection->check_ownershipdocument = $request->check_ownershipdocument; 
+        $inspection->initial_ownershipdocument = $request->initial_ownershipdocument;
+
+        $inspection->check_tradelicense = $request->check_tradelicense;
+        $inspection->initial_tradelicense = $request->initial_tradelicense;
+
+        $inspection->check_tinpaper = $request->check_tinpaper;
+        $inspection->initial_tinpaper = $request->initial_tinpaper;
+
+        $inspection->check_bankcertificate = $request->check_bankcertificate;
+        $inspection->initial_bankcertificate = $request->initial_bankcertificate;    
 
         $inspection->phase_1_message = $request->phase_1_message;
 
@@ -187,11 +246,32 @@ class InspectionController extends Controller
             'email' => $request->email,
             'from' => 'flasbfscd@gmail.com',
             'subject' => 'FLAS Application Inspection Report',
-            'bodyMessage' => $request->phase_1_message
+            'phase_1_message' => $request->phase_1_message,
+            'initial_company_name' => $request->initial_company_name,
+            'initial_email' => $request->initial_email,
+            'initial_phone' => $request->initial_phone,
+            'initial_owner' => $request->initial_owner,
+            'initial_chairman' => $request->initial_chairman,
+            'initial_ceo' => $request->initial_ceo,
+            'initial_address' => $request->initial_address,
+            'initial_employees' => $request->initial_employees,
+            'initial_estd' => $request->initial_estd,
+            'initial_area' => $request->initial_area,
+            'initial_fire_extinguisher' => $request->initial_fire_extinguisher,
+            'initial_fire_extinguisher_exp_date' => $request->initial_fire_extinguisher_exp_date,
+            'initial_rod_breaker' => $request->initial_rod_breaker, 
+            'initial_emergency_exit' => $request->initial_emergency_exit,
+            'initial_storey' => $request->initial_storey,
+            'initial_nearest_buildings' => $request->initial_nearest_buildings,
+            'initial_layoutplan' => $request->initial_layoutplan,
+            'initial_ownershipdocument' => $request->initial_ownershipdocument,
+            'initial_tradelicense' => $request->initial_tradelicense,
+            'initial_tinpaper' => $request->initial_tinpaper,
+            'initial_bankcertificate' => $request->initial_bankcertificate
             );
         Mail::send('emails.inspect', $data, function($message) use ($data){
             $message->from($data['from']);
-            $message->to('orbachinujbuk@gmail.com');
+            $message->to('orbachinujbuk@gmail.com'); // for testing purpose
             $message->subject($data['subject']);
         });
 
@@ -239,7 +319,7 @@ class InspectionController extends Controller
             'subject' => 'FLAS Application Inspection Report',
             'bodyMessage' => $request->phase_2_message
             );
-        Mail::send('emails.inspect', $data, function($message) use ($data){
+        Mail::send('emails.phase2', $data, function($message) use ($data){
             $message->from($data['from']);
             $message->to('orbachinujbuk@gmail.com');
             $message->subject($data['subject']);
@@ -288,8 +368,31 @@ class InspectionController extends Controller
             'initial_employees'          => 'sometimes|max:255',
             'check_estd'                 => 'sometimes',
             'initial_estd'               => 'sometimes|max:255',
-            'check_image'                => 'sometimes',
-            'initial_image'              => 'sometimes|max:255',
+
+            'check_area'                 => 'sometimes',
+            'initial_area'               => 'sometimes|max:255',
+            'check_fire_extinguisher'    => 'sometimes',
+            'initial_fire_extinguisher'  => 'sometimes|max:255',
+            'check_fire_extinguisher_exp_date'                 => 'sometimes',
+            'initial_fire_extinguisher_exp_date'               => 'sometimes|max:255',
+            'check_rod_breaker'          => 'sometimes',
+            'initial_rod_breaker'        => 'sometimes|max:255',
+            'check_emergency_exit'          => 'sometimes',
+            'initial_emergency_exit'        => 'sometimes|max:255',
+            'check_storey'          => 'sometimes',
+            'initial_storey'        => 'sometimes|max:255',
+            'check_nearest_buildings'          => 'sometimes',
+            'initial_nearest_buildings'        => 'sometimes|max:255',
+            'check_layoutplan'          => 'sometimes',
+            'initial_layoutplan'        => 'sometimes|max:255',
+            'check_ownershipdocument'          => 'sometimes',
+            'initial_ownershipdocument'        => 'sometimes|max:255',
+            'check_tradelicense'          => 'sometimes',
+            'initial_tradelicense'        => 'sometimes|max:255',
+            'check_tinpaper'          => 'sometimes',
+            'initial_tinpaper'        => 'sometimes|max:255',
+            'check_bankcertificate'          => 'sometimes',
+            'initial_bankcertificate'        => 'sometimes|max:255',
             'phase_1_message'              => 'sometimes'
        ));
 
@@ -322,8 +425,41 @@ class InspectionController extends Controller
         $inspection->check_estd = $request->check_estd;
         $inspection->initial_estd = $request->initial_estd;
         
-        $inspection->check_image = $request->check_image;
-        $inspection->initial_image = $request->initial_image;
+        $inspection->check_area = $request->check_area;
+        $inspection->initial_area = $request->initial_area;
+
+        $inspection->check_fire_extinguisher = $request->check_fire_extinguisher;
+        $inspection->initial_fire_extinguisher = $request->initial_fire_extinguisher;
+
+        $inspection->check_fire_extinguisher_exp_date = $request->check_fire_extinguisher_exp_date;
+        $inspection->initial_fire_extinguisher_exp_date = $request->initial_fire_extinguisher_exp_date;
+
+        $inspection->check_rod_breaker = $request->check_rod_breaker;
+        $inspection->initial_rod_breaker = $request->initial_rod_breaker;
+
+        $inspection->check_emergency_exit = $request->check_emergency_exit;
+        $inspection->initial_emergency_exit = $request->initial_emergency_exit;
+
+        $inspection->check_storey = $request->check_storey;
+        $inspection->initial_storey = $request->initial_storey;
+
+        $inspection->check_nearest_buildings = $request->check_nearest_buildings;
+        $inspection->initial_nearest_buildings = $request->initial_nearest_buildings;
+
+        $inspection->check_layoutplan = $request->check_layoutplan;
+        $inspection->initial_layoutplan = $request->initial_layoutplan; 
+
+        $inspection->check_ownershipdocument = $request->check_ownershipdocument; 
+        $inspection->initial_ownershipdocument = $request->initial_ownershipdocument;
+
+        $inspection->check_tradelicense = $request->check_tradelicense;
+        $inspection->initial_tradelicense = $request->initial_tradelicense;
+
+        $inspection->check_tinpaper = $request->check_tinpaper;
+        $inspection->initial_tinpaper = $request->initial_tinpaper;
+
+        $inspection->check_bankcertificate = $request->check_bankcertificate;
+        $inspection->initial_bankcertificate = $request->initial_bankcertificate;  
 
         $inspection->phase_1_message = $request->phase_1_message;
 
@@ -340,11 +476,32 @@ class InspectionController extends Controller
             'email' => $request->email,
             'from' => 'flasbfscd@gmail.com',
             'subject' => 'FLAS Application Inspection Report',
-            'bodyMessage' => $request->phase_1_message
+            'phase_1_message' => $request->phase_1_message,
+            'initial_company_name' => $request->initial_company_name,
+            'initial_email' => $request->initial_email,
+            'initial_phone' => $request->initial_phone,
+            'initial_owner' => $request->initial_owner,
+            'initial_chairman' => $request->initial_chairman,
+            'initial_ceo' => $request->initial_ceo,
+            'initial_address' => $request->initial_address,
+            'initial_employees' => $request->initial_employees,
+            'initial_estd' => $request->initial_estd,
+            'initial_area' => $request->initial_area,
+            'initial_fire_extinguisher' => $request->initial_fire_extinguisher,
+            'initial_fire_extinguisher_exp_date' => $request->initial_fire_extinguisher_exp_date,
+            'initial_rod_breaker' => $request->initial_rod_breaker,
+            'initial_emergency_exit' => $request->initial_emergency_exit,
+            'initial_storey' => $request->initial_storey,
+            'initial_nearest_buildings' => $request->initial_nearest_buildings,
+            'initial_layoutplan' => $request->initial_layoutplan,
+            'initial_ownershipdocument' => $request->initial_ownershipdocument,
+            'initial_tradelicense' => $request->initial_tradelicense,
+            'initial_tinpaper' => $request->initial_tinpaper,
+            'initial_bankcertificate' => $request->initial_bankcertificate 
             );
         Mail::send('emails.inspect', $data, function($message) use ($data){
             $message->from($data['from']);
-            $message->to('orbachinujbuk@gmail.com');
+            $message->to('orbachinujbuk@gmail.com'); // for testing purpose
             $message->subject($data['subject']);
         });
 

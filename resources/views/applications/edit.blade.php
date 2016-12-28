@@ -35,7 +35,7 @@
 			<p>Application Status: <strong>{{ $application->application_status->display_name }}</strong></p>
 			<a href="{{ url('applications/'.$application->id) }}" class="btn btn-success">See Application</a>
 			@else
-			<h1>Apply for License</h1>
+			<h1>আবেদন পত্র সম্পাদন করুন</h1>
 			<hr>
 			{!! Form::model($application, ['method' => 'PATCH','route' => ['applications.update', $application->id], 'data-parsley-validate' => '', 'files' => 'true', 'enctype' => 'multipart/form-data']) !!} 
 			

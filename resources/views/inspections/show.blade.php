@@ -50,10 +50,6 @@
 						<th>Established</th>
 						<td>{!! $application->estd!!}</td>
 					</tr>
-					<tr>
-						<th>Image</th>
-						<td><img src="{{ asset('images/'. $application->image) }}" class="img-responsive"></td>
-					</tr>
 				</thead>
 			</table>			
 		</div>

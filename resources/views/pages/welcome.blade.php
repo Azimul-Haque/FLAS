@@ -143,6 +143,7 @@
                     @endrole
                     <li><a href="{{ url('/about') }}"><i class="fa fa-address-book-o" aria-hidden="true"></i> আমাদের সম্পর্কে</a></li>
                     <li><a href="{{ url('/contact') }}"><i class="fa fa-envelope-o" aria-hidden="true"></i> যোগাযোগ</a></li>
+                    <li><a href="{{ url('/applicationstatus/search') }}"><i class="fa fa-search" aria-hidden="true"></i> আবেদনের হাল খুঁজুন</a></li>
                   </ul>
                   <ul class="nav navbar-nav navbar-right">
 
@@ -155,7 +156,7 @@
                     </li>
                     @else
                     <li class="dropdown">
-                      <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle" aria-hidden="true"></i> ব্যবহারকারীর অ্যাকাউন্ট<span class="caret"></span></a>
+                      <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle" aria-hidden="true"></i> অ্যাকাউন্ট<span class="caret"></span></a>
                       <ul class="dropdown-menu">
                         <li><a href="{{ route('login') }}" class=""><i class="fa fa-sign-in" aria-hidden="true"></i> লগইন</a></li>
                         <li><a href="{{ route('register') }}" class=""><i class="fa fa-user-plus" aria-hidden="true"></i> রেজিস্টার</a></li>

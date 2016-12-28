@@ -15,6 +15,9 @@ Route::get('/', 'PagesController@getIndex');
 Route::get('/about', 'PagesController@getAbout');
 Route::get('/contact', 'PagesController@getContact');
 Route::post('/contact', 'PagesController@postContact');
+Route::get('/applicationstatus/search', 'PagesController@getApplicationStatusSearchPage');
+Route::get('/applicationstatus/search/result/', ['as' => 'applicationstatus.searchresult', 'uses' => 'PagesController@getApplicationStatus']);
+
 
 // Authentication routes
 Route::get('auth/login', ['as' => 'login', 'uses' => 'Auth\AuthController@getLogin']);
@@ -95,3 +98,10 @@ Route::get('/reports/export/inspected/pdf', 'ReportController@getPDFInspected');
 Route::get('/reports/export/approved/pdf', 'ReportController@getPDFApproved');
 Route::get('/reports/export/rejected/pdf', 'ReportController@getPDFRejected');
 Route::get('/reports/export/expired/pdf', 'ReportController@getPDFExpired');
+
+// Fire Emergency App
+Route::get('/reports/androidapp', ['as' => 'reports.androidapp', 'uses' => 'ReportController@getAndroidApp']);
+Route::post('reports/new/firestation', 'ReportController@postNewFireStation');
+// Export file as excel (.xlxs) format-Fire Emergency
+Route::get('/reports/export/androidapp/messages', 'ReportController@getExcelAppMessages');
+

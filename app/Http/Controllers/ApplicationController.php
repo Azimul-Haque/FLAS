@@ -11,7 +11,7 @@ use Validator, Input, Redirect, Session;
 use Auth;
 use Image;
 use PDF;
-Use NoCaptcha;
+use NoCaptcha;
 
 class ApplicationController extends Controller
 {
@@ -327,12 +327,6 @@ class ApplicationController extends Controller
         return $pdf->stream();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //

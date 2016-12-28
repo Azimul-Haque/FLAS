@@ -12,6 +12,8 @@ use Auth;
 use PDF;
 use Excel;
 use App\User;
+use App\FireStations;
+use App\AppMessages;
 
 class ReportController extends Controller
 {
@@ -164,6 +166,61 @@ class ReportController extends Controller
         $fileName = 'Expired_Applications_'. date('F_d_Y') .'.pdf';
         return $pdf->stream($fileName);
     }
+
+    // Fire Emergency Application
+    public function getAndroidApp() {
+        $firestations = FireStations::orderBy('id','DESC')->paginate(10);
+        $totalfirestations = FireStations::orderBy('id','DESC')->count();
+        $appmessages = AppMessages::orderBy('id','DESC')->get();
+        $totalappmessages = AppMessages::orderBy('id','DESC')->count();
+        $firestationsfordistance = FireStations::orderBy('id','DESC')->get();
+
+        return view('reports.androidapp')
+                    ->withFirestations($firestations)
+                    ->withTotalfirestations($totalfirestations)
+                    ->withAppmessages($appmessages)
+                    ->withTotalappmessages($totalappmessages)
+                    ->withFirestationsfordistance($firestationsfordistance);
+
+    }
+
+    public function getExcelAppMessages(){
+        $applications = AppMessages::orderBy('id','DESC')->get();
+
+        $fileName = 'Emergency_Messages_'. date('F_d_Y');                
+        Excel::create($fileName, function($excel) use($applications) {
+            $excel->sheet('Sheet 1', function($sheet) use($applications) {
+                $sheet->fromArray($applications);
+            });
+        })->export('xlsx');
+    }
+
+    public function postNewFireStation(Request $request) {
+        //validation
+        $this->validate($request, array(
+            'name'       => 'required|max:255',
+            'lat'        => 'required|max:255',
+            'lon'        => 'required|max:255',
+            'phone'        => 'required|max:255'
+       ));
+
+       //store to DB
+        $firestation = new FireStations;
+
+        $firestation->name = $request->name;
+        $firestation->lat = $request->lat;
+        $firestation->lon = $request->lon;
+        $firestation->phone = $request->phone;
+
+        $firestation->save();
+
+        Session::flash('success', 'নতুন ফায়ার স্টেশন যোগ করা হয়েছে:'. $request->name);
+
+        //redirect
+        return redirect()->route('reports.androidapp');
+    }
+
+
 }
 
 
