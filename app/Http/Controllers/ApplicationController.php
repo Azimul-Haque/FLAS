@@ -42,12 +42,7 @@ class ApplicationController extends Controller
         return view('applications.create')->withApplied($applied);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
         //validation
@@ -324,7 +319,8 @@ class ApplicationController extends Controller
                             ->first(); 
         //$pdf = PDF::loadHTML('<h1>'.$application->id.'</h1>')->setPaper('a4', 'portrait')->setWarnings(false);
         $pdf = PDF::loadView('pdf.index', compact('application'))->setPaper('a4', 'portrait')->setWarnings(false);
-        return $pdf->stream();
+        $fileName = $application->license_number.'.pdf';
+        return $pdf->stream($fileName);
     }
 
     public function destroy($id)

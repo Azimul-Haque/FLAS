@@ -26,9 +26,10 @@
         <th>Status</th>
         <th width="280px">Action</th>
       </tr>
+    <?php $i=1;?>  
     @foreach ($applications as $application)
     <tr>
-      <td>{{ $application->id }}</td>
+      <td>{{ $i++ }}</td>
       <td>{{ $application->company_name }}</td>
       <td>{{ $application->user->name }}</td>
       <td>{{ date('F d, Y | h:i A', strtotime($application->created_at))}}, {{ $application->created_at->diffForHumans() }} </td>

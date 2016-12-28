@@ -36,6 +36,7 @@
               {!! Form::close() !!}<br/>
               
               @if(!empty($applicationstatus))
+              <h3>প্রতিষ্ঠানের নাম: {{ $applicationstatus->company_name }}</h3>
               <h3>আবেদনের হাল (Application Status): {{ $applicationstatus->application_status->display_name }}</h3>
               <h3>আবেদনের তারিখ: {{ date('F d, Y | h:i A', strtotime($applicationstatus->created_at))}}, {{ $applicationstatus->created_at->diffForHumans() }}</h3> 
               @endif

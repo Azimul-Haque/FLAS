@@ -200,13 +200,13 @@
 						@if ($application->is_editable === 1)
 						{!! Html::linkRoute('applications.edit', 'Edit', array($application->id), array('class'=>'btn btn-primary btn-block')) !!}
 						@else
-						<button class="btn btn-primary btn-block disabled">Edit</button>
+						<button class="btn btn-primary btn-block disabled"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>
 						@endif
 						
 						
 					</div>
 					<div class="col-sm-6">
-					{!! Html::linkRoute('applications.destroy', 'Revoke', array($application->id), array('class'=>'btn btn-danger btn-block')) !!}
+					
 					</div>
 				</div>
 			</div>

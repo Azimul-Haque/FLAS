@@ -210,7 +210,7 @@
     <script>
 $(function() {
 	$('#expiry_date').datepicker({
-        dateFormat: 'yy-dd-mm',
+        dateFormat: 'yy-mm-dd',
         onSelect: function(datetext){
             var d = new Date(); // for now
             var h = d.getHours();
