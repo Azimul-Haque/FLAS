@@ -208,25 +208,25 @@
 	{!!Html::script('js/dtpui.js')!!}
 	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script> -->
     <script>
-$(function() {
-	$('#expiry_date').datepicker({
-        dateFormat: 'yy-mm-dd',
-        onSelect: function(datetext){
-            var d = new Date(); // for now
-            var h = d.getHours();
-        		h = (h < 10) ? ("0" + h) : h ;
+		$(function() {
+			$('#expiry_date').datepicker({
+		        dateFormat: 'yy-mm-dd',
+		        onSelect: function(datetext){
+		            var d = new Date(); // for now
+		            var h = d.getHours();
+		        		h = (h < 10) ? ("0" + h) : h ;
 
-        		var m = d.getMinutes();
-            m = (m < 10) ? ("0" + m) : m ;
+		        		var m = d.getMinutes();
+		            m = (m < 10) ? ("0" + m) : m ;
 
-            var s = d.getSeconds();
-            s = (s < 10) ? ("0" + s) : s ;
+		            var s = d.getSeconds();
+		            s = (s < 10) ? ("0" + s) : s ;
 
-        		datetext = datetext + " " + h + ":" + m + ":" + s;
-            $('#expiry_date').val(datetext);
-        },
-    });
-}); 
+		        		datetext = datetext + " " + h + ":" + m + ":" + s;
+		            $('#expiry_date').val(datetext);
+		        },
+		    });
+		}); 
         /*$(function() {
             $( ".input-group.date" ).datepicker({
                 format: 'MM dd, yyyy H S I A',

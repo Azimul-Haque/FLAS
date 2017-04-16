@@ -216,7 +216,7 @@
                 </div>
             </div>
           <div class="col-md-10">
-          @include('partials._messages')
+            @include('partials._messages')
             @yield('content')
           </div>
       @else

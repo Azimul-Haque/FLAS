@@ -14,6 +14,24 @@
       ul.caption{
         list-style: none;
       }
+      /*CSS for Navbar*/
+      .navbar-custom {
+          background-color:#229922;
+          color:#ffffff;
+          border-radius:0;
+      }
+
+      .navbar-custom .navbar-nav > li > a {
+          color:#fff;
+      }
+      .navbar-custom .navbar-nav > .active > a, .navbar-nav > .active > a:hover, .navbar-nav > .active > a:focus {
+          color: #ffffff;
+          background-color:transparent;
+      }
+      .navbar-custom .navbar-brand {
+          color:#eeeeee;
+      }
+      /*CSS for Navbar*/
     </style>
 </head>
 <body>
@@ -96,7 +114,7 @@
 
       <div class="col-md-10 col-md-offset-1">
             <!-- Default Bootstrap Navbar -->
-            <nav class="navbar navbar-default"> <!--USE IT NEAR FUTURE  navbar-fixed-top-->
+            <nav class="navbar navbar-custom"> <!--USE IT NEAR FUTURE  navbar-fixed-top-->
               <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
