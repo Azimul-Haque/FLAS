@@ -53,7 +53,7 @@ class ApplicationController extends Controller
             'owner'              => 'required|max:255',
             'chairman'           => 'required|max:255',
             'ceo'                => 'required|max:255',
-            'address'            => 'required|min:30|max:255',
+            'address'            => 'required|max:255',
             'employees'          => 'required|integer',
             'area'               => 'required|integer',
             'fire_extinguisher'  => 'required|integer',
@@ -69,7 +69,7 @@ class ApplicationController extends Controller
             'tradelicense'       => 'required|max:300',
             'tinpaper'           => 'required|max:300',
             'bankcertificate'    => 'required|max:300',
-            'g-recaptcha-response' => 'required'
+            'g-recaptcha-response' => 'sometimes'
        ));
 
 
@@ -212,7 +212,7 @@ class ApplicationController extends Controller
             'owner'              => 'required|max:255',
             'chairman'           => 'required|max:255',
             'ceo'                => 'required|max:255',
-            'address'            => 'required|min:30|max:255',
+            'address'            => 'required|max:255',
             'employees'          => 'required|integer',
             'area'               => 'required|integer',
             'fire_extinguisher'  => 'required|integer',

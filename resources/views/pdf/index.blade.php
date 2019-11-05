@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
   <title>{{$application->license_number}}</title>
   <style>
 	body { font-family: DejaVu Sans;}
@@ -12,8 +11,7 @@
     border-radius: 4px;
   }
   </style>
-</head>
-<body>
+</head><body>
 
 <div class="container">
   <center>
@@ -55,8 +53,7 @@
   </div>
 </div>
 
-</body>
-</html>
+</body></html>
 
 
             

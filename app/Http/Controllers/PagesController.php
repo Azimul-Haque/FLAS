@@ -64,7 +64,7 @@ class PagesController extends Controller
     public function getApplicationStatus(Request $request) {
         $this->validate($request, array(
             'tracking_number'       => 'required|max:255',
-            'g-recaptcha-response'  => 'required'   
+            'g-recaptcha-response'  => 'sometimes'   
         ));
 
         $applicationstatus = Application::where('tracking_number', '=' , $request->tracking_number)

@@ -268,7 +268,8 @@ class InspectionController extends Controller
             'initial_tradelicense' => $request->initial_tradelicense,
             'initial_tinpaper' => $request->initial_tinpaper,
             'initial_bankcertificate' => $request->initial_bankcertificate
-            );
+        );
+        
         Mail::send('emails.inspect', $data, function($message) use ($data){
             $message->from($data['from']);
             $message->to('orbachinujbuk@gmail.com'); // for testing purpose
@@ -559,7 +560,7 @@ class InspectionController extends Controller
             'license_number' => $year.$application->company_type.$unique.$expiry_date_date_for_license,
             'expiry_date' => $request->expiry_date,
             'id' => $id
-            );
+        );
         Mail::send('emails.approve', $data, function($message) use ($data){
             $message->from($data['from']);
             $message->to('orbachinujbuk@gmail.com');
